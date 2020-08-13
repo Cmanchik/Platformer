@@ -1,30 +1,41 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Events;
+﻿using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private MovementScript movementScript;
+    private MovementScript _movementScript;
+    private Animator _animator;
 
     private void Awake()
     {
-        movementScript = GetComponent<MovementScript>();
+        _movementScript = GetComponent<MovementScript>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        MovementLogic();  
+        MovementLogic();
+        AnimationMovementLogic();
     }
 
     private void MovementLogic()
     {
-        if (movementScript)
+        if (_movementScript)
         {
-            movementScript.Move(Input.GetAxis("Horizontal"));
+            _movementScript.Move(Input.GetAxis("Horizontal"));
 
             if (InputManager.Instance.isJump)
-                movementScript.Jump();
+                _movementScript.Jump();
+        }
+    }
+
+    private void AnimationMovementLogic()
+    {
+        if (_animator)
+        {
+            MovementState state = _movementScript.State;
+
+            _animator.SetBool("Move", state == MovementState.Move);
+            _animator.SetBool("Jump", state == MovementState.Jump);
         }
     }
 }

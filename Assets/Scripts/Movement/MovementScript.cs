@@ -35,6 +35,10 @@ public class MovementScript : MonoBehaviour
     }
 
 
+    private MovementState _state;
+    public MovementState State { get { return _state; } }
+    
+
     [SerializeField]
     private int _jumpCount;
     public int JumpCount { get { return _jumpCount; } }
@@ -59,7 +63,7 @@ public class MovementScript : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody2D>();
         _isGrounded = false;
-
+        _state = MovementState.Idle;
         _jumpCurrent = _jumpCount;
     }
 
@@ -70,6 +74,11 @@ public class MovementScript : MonoBehaviour
         if (axisHorizontal > 0) transform.rotation = Quaternion.Euler(new Vector2(0, 0));
         else if (axisHorizontal < 0) transform.rotation = Quaternion.Euler(new Vector2(0, 180));
 
+        if (_state != MovementState.Jump)
+        {
+            if (axisHorizontal != 0) _state = MovementState.Move;
+            else _state = MovementState.Idle;
+        }
     }
 
     public void Jump()
@@ -77,18 +86,13 @@ public class MovementScript : MonoBehaviour
         if (_jumpCurrent > 0 || _isGrounded)
         {
             _rb.velocity = new Vector2(_rb.velocity.x, jumpForce);
-
+            _state = MovementState.Jump;
             _isGrounded = false;
             _jumpCurrent--;
         }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
-    {
-        IsGroundedUpdate();
-    }
-
-    void OnCollisionExit2D(Collision2D collision)
     {
         IsGroundedUpdate();
     }
@@ -102,6 +106,7 @@ public class MovementScript : MonoBehaviour
             if (_isGrounded)
             {
                 _jumpCurrent = _jumpCount;
+                _state = MovementState.Idle;
                 return;
             }
         }
