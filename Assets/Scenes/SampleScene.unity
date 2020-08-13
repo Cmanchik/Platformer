@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 12
-  manyAttackPerCollision: 0
+  manyAttackPerCollision: 1
   "\u0441ooldownAttack": 0
   isRigidBody: 0
 --- !u!1 &519420028
