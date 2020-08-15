@@ -6,5 +6,6 @@ public enum MovementState
 {
     Idle,
     Move,
-    Jump
+    Jump,
+    Fall
 }

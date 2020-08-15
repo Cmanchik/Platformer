@@ -67,6 +67,12 @@ public class MovementScript : MonoBehaviour
         _jumpCurrent = _jumpCount;
     }
 
+
+    private void LateUpdate()
+    {
+        if (_rb.velocity.y < -0.1f) _state = MovementState.Fall;
+    }
+
     public void Move(float axisHorizontal)
     {
         _rb.velocity = new Vector2(axisHorizontal * speed, _rb.velocity.y);
@@ -74,7 +80,7 @@ public class MovementScript : MonoBehaviour
         if (axisHorizontal > 0) transform.rotation = Quaternion.Euler(new Vector2(0, 0));
         else if (axisHorizontal < 0) transform.rotation = Quaternion.Euler(new Vector2(0, 180));
 
-        if (_state != MovementState.Jump)
+        if (_state != MovementState.Jump && _state != MovementState.Fall)
         {
             if (axisHorizontal != 0) _state = MovementState.Move;
             else _state = MovementState.Idle;

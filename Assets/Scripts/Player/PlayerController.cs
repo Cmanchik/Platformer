@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
 
             _animator.SetBool("Move", state == MovementState.Move);
             _animator.SetBool("Jump", state == MovementState.Jump);
+            _animator.SetBool("Fall", state == MovementState.Fall);
         }
     }
 }
