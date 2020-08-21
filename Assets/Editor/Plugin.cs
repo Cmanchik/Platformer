@@ -123,7 +123,7 @@ namespace WakaTime {
     }
 
     static void SendHeartbeat(bool fromSave = false) {
-      if (_debug) Debug.Log("<WakaTime> Sending heartbeat...");
+      //if (_debug) Debug.Log("<WakaTime> Sending heartbeat...");
 
       var currentScene = EditorSceneManager.GetActiveScene().path;
       var file = currentScene != string.Empty
@@ -133,7 +133,7 @@ namespace WakaTime {
       var heartbeat = new Heartbeat(file, fromSave);
       if ((heartbeat.time - _lastHeartbeat.time < HEARTBEAT_COOLDOWN) && !fromSave &&
         (heartbeat.entity == _lastHeartbeat.entity)) {
-        if (_debug) Debug.Log("<WakaTime> Skip this heartbeat");
+        //if (_debug) Debug.Log("<WakaTime> Skip this heartbeat");
         return;
       }
 
@@ -152,15 +152,15 @@ namespace WakaTime {
             return;
           }
 
-          if (_debug)
-            Debug.Log("<WakaTime> Got response\n" + request.downloadHandler.text);
+          //if (_debug)
+            //Debug.Log("<WakaTime> Got response\n" + request.downloadHandler.text);
           var response =
             JsonUtility.FromJson<Response<HeartbeatResponse>>(
               request.downloadHandler.text);
 
           if (response.error != null) {
             if (response.error == "Duplicate") {
-              if (_debug) Debug.LogWarning("<WakaTime> Duplicate heartbeat");
+              //if (_debug) Debug.LogWarning("<WakaTime> Duplicate heartbeat");
             }
             else {
               Debug.LogError(
@@ -169,7 +169,7 @@ namespace WakaTime {
             }
           }
           else {
-            if (_debug) Debug.Log("<WakaTime> Sent heartbeat!");
+            //if (_debug) Debug.Log("<WakaTime> Sent heartbeat!");
             _lastHeartbeat = response.data;
           }
         };

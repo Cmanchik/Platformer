@@ -4,9 +4,11 @@ public class PlayerController : MonoBehaviour
 {
     private MovementScript _movementScript;
     private Animator _animator;
+    private ComboSystem _comboSystem;
 
     private void Awake()
     {
+        
         _movementScript = GetComponent<MovementScript>();
         _animator = GetComponent<Animator>();
     }
@@ -39,4 +41,5 @@ public class PlayerController : MonoBehaviour
             _animator.SetBool("Fall", state == MovementState.Fall);
         }
     }
+
 }
