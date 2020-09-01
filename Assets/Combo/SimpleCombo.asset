@@ -10,7 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84f83df6fd3ba824296e4f5567442686, type: 3}
-  m_Name: New ComboAttack
+  m_Name: SimpleCombo
   m_EditorClassIdentifier: 
-  _animationNames: []
-  _triggerButtons: 
+  _animationNames:
+  - Attack1
+  - Attack2
+  - Attack3
+  _triggerButtons: 430100004301000043010000

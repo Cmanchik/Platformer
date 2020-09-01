@@ -1,51 +1,60 @@
-﻿using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "New ComboAttack", menuName = "Combo Attack Data")]
 public class ComboAttack : ScriptableObject
 {
     [SerializeField]
-    protected string[] _animationTriggerNames;
+    protected string[] _animationNames;
 
     [SerializeField]
     protected KeyCode[] _triggerButtons;
 
-    [SerializeField]
     protected float[] _timeBtwAttacks;
 
-    protected int _numCombo = 1;
+    protected int _numCombo = 0;
     public int NumCombo 
     { 
         get { return _numCombo; } 
         set
         {
-            if (value > MaxCombo)
-                _numCombo = 1;
+            _numCombo = value;
+
+            if (value >= MaxCombo)
+                _numCombo = 0;
         }
     }
 
-    public int MaxCombo { get { return _animationTriggerNames.Length; } }
+    public int MaxCombo { get { return _animationNames.Length; } }
+
+    public void LoadTimeAnimation()
+    {
+        _timeBtwAttacks = new float[_animationNames.Length];
+        for (int i = 0; i < _animationNames.Length; i++)
+        {
+            _timeBtwAttacks[i] = (Resources.Load("Attack Animations/" + _animationNames[i]) as AnimationClip).length;
+        }
+    }
 
     public float? GetTimeAttack(int index)
     {
-        if (index >= _timeBtwAttacks.Length) return null;
+        if (index >= _timeBtwAttacks.Length || index < 0) return null;
         return _timeBtwAttacks[index];
     }
 
     public KeyCode? GetTriggerButton(int index)
     {
-        if (index >= _triggerButtons.Length) return null;
+        if (index >= _triggerButtons.Length || index < 0) return null;
         return _triggerButtons[index];
     }
 
     public string GetAnimationName(int index)
     {
-        if (index >= _animationTriggerNames.Length) return null;
-        return _animationTriggerNames[index];
+        if (index >= _animationNames.Length || index < 0) return null;
+        return _animationNames[index];
     }
 
     public void ResetCombo()
     {
-        _numCombo = 1;
+        _numCombo = 0;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using TMPro;
 using UnityEngine;
 
 public class ComboSystem : MonoBehaviour
@@ -9,28 +10,60 @@ public class ComboSystem : MonoBehaviour
     private int _numCombo = 0;
     private float lastAttackTime;
 
-    public string CheckCombo(KeyCode keyCode)
+    private void Awake()
     {
-        string nameTriggerAnimation = null;
         foreach (ComboAttack combo in comboAttacks)
         {
-            // проверка на соответствие этапу комбо
-            // проверка на соответсвии кнопок на текущем этапе комбо
-            // проверка на поподание в тайминг удара
-            KeyCode? code = combo.GetTriggerButton(_numCombo);
-            if (_numCombo != combo.NumCombo || code == null ||
-                !HitTimeRange(Time.time, lastAttackTime, combo.GetTimeAttack(_numCombo)))
+            combo.LoadTimeAnimation();
+            combo.ResetCombo();
+        }
+    }
+
+    public string CompleteCombo(KeyCode inputBtn)
+    {
+        string nameTriggerAnimation = null;
+
+        foreach (ComboAttack combo in comboAttacks)
+        {
+            KeyCode? comboBtn = combo.GetTriggerButton(_numCombo);
+
+            if (_numCombo == combo.NumCombo && inputBtn == comboBtn && 
+                HitTimeRange(Time.time, lastAttackTime, combo.GetTimeAttack(_numCombo - 1)))
             {
-                if (combo.NumCombo != 1) combo.ResetCombo();
-                return null;
+                combo.NumCombo += 1;
+
+                if (nameTriggerAnimation == null)
+                {
+                    nameTriggerAnimation = combo.GetAnimationName(_numCombo);
+                    lastAttackTime = Time.time;
+                    _numCombo++;
+                }
             }
-            //если все проверки пройденны, то это нужное комбо
             else
             {
-                nameTriggerAnimation = combo.GetAnimationName(_numCombo);
-                lastAttackTime = Time.time;
-                combo.NumCombo++;
-                _numCombo++;
+                //Debug.Log(String.Format("_numCombo: {0} | NumCombo: {1}", _numCombo, combo.NumCombo));
+                Debug.Log(String.Format("_numCombo == combo.NumCombo: {0} | inputBtn == comboBtn: {1} | HitTimeRange: {2} | name: {3}", _numCombo == combo.NumCombo, inputBtn == comboBtn, HitTimeRange(Time.time, lastAttackTime, combo.GetTimeAttack(_numCombo)), combo.GetAnimationName(_numCombo)));
+                combo.ResetCombo();
+            }
+        }
+
+        if (nameTriggerAnimation == null)
+        {
+            _numCombo = 0;
+            foreach (ComboAttack combo in comboAttacks)
+            {
+                KeyCode? comboBtn = combo.GetTriggerButton(_numCombo);
+                if (inputBtn == comboBtn)
+                {
+                    combo.NumCombo++;
+
+                    if (nameTriggerAnimation == null)
+                    {
+                        nameTriggerAnimation = combo.GetAnimationName(_numCombo);
+                        lastAttackTime = Time.time;
+                        _numCombo++;
+                    }
+                }
             }
         }
 
@@ -39,6 +72,7 @@ public class ComboSystem : MonoBehaviour
 
     private bool HitTimeRange(float currentTime, float lastTime, float? rangeTime)
     {
-        return currentTime - lastTime < rangeTime;
+        if (rangeTime == null) return false;
+        return currentTime - lastTime <= rangeTime;
     }
 }
