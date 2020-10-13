@@ -155,6 +155,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &273889606 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6956275423174498898, guid: aec8c99ee0de3fb4ab24627406dbb47a,
+    type: 3}
+  m_PrefabInstance: {fileID: 6956275423776851287}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &273889607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273889606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85361a37704caf04ea6bc2cf938db75b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeCheckTime: 1
+--- !u!114 &273889608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273889606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6737fc26d9f170d4a93a3c5b10372bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &334537335
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,6 +196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 334537336}
   - component: {fileID: 334537337}
+  - component: {fileID: 334537338}
   m_Layer: 0
   m_Name: AttackCollider
   m_TagString: Untagged
@@ -212,6 +244,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &334537338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334537335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 863cb9dc3563b59468f98aab22f617ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDamage: 20
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,7 +366,6 @@ GameObject:
   m_Component:
   - component: {fileID: 596259580}
   - component: {fileID: 596259579}
-  - component: {fileID: 596259578}
   - component: {fileID: 596259581}
   m_Layer: 0
   m_Name: Speaks
@@ -330,22 +374,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &596259578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 596259577}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0801fe71281f8a4cb871f4e26061cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 7
-  manyAttackPerCollision: 1
-  "\u0441ooldownAttack": 2
-  isRigidBody: 1
 --- !u!212 &596259579
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1587,7 +1615,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1729388547}
   - component: {fileID: 1729388546}
-  - component: {fileID: 1729388545}
   - component: {fileID: 1729388544}
   m_Layer: 0
   m_Name: Speaks (2)
@@ -1622,22 +1649,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.99, y: 5.27}
   m_EdgeRadius: 0
---- !u!114 &1729388545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1729388543}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0801fe71281f8a4cb871f4e26061cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 7
-  manyAttackPerCollision: 1
-  "\u0441ooldownAttack": 1
-  isRigidBody: 1
 --- !u!212 &1729388546
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1712,7 +1723,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1770604553}
   - component: {fileID: 1770604552}
-  - component: {fileID: 1770604551}
   - component: {fileID: 1770604550}
   m_Layer: 0
   m_Name: Speaks (1)
@@ -1747,22 +1757,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 6.99, y: 5.27}
   m_EdgeRadius: 0
---- !u!114 &1770604551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1770604549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0801fe71281f8a4cb871f4e26061cf7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 7
-  manyAttackPerCollision: 1
-  "\u0441ooldownAttack": 1
-  isRigidBody: 1
 --- !u!212 &1770604552
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1846,7 +1840,7 @@ GameObject:
   - component: {fileID: 1772914054}
   m_Layer: 0
   m_Name: Herman
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2393,6 +2387,11 @@ PrefabInstance:
       propertyPath: hitEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 7400000, guid: 10f852378f63a244182f6d3b3a0cd06e, type: 2}
+    - target: {fileID: 6956275423174498897, guid: aec8c99ee0de3fb4ab24627406dbb47a,
+        type: 3}
+      propertyPath: maxHealthPoint
+      value: 1000000
+      objectReference: {fileID: 0}
     - target: {fileID: 6956275423174498898, guid: aec8c99ee0de3fb4ab24627406dbb47a,
         type: 3}
       propertyPath: m_Name

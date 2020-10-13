@@ -8,10 +8,15 @@ public class ComboSystem : MonoBehaviour
     private ComboAttack[] comboAttacks;
 
     private int _numCombo = 0;
+    public int NumCombo { get { return _numCombo; } }
+
+    private float maxDamageMultiplier;
     private float lastAttackTime;
 
     private void Awake()
     {
+        maxDamageMultiplier = 1;
+
         foreach (ComboAttack combo in comboAttacks)
         {
             combo.LoadTimeAnimation();
@@ -22,6 +27,7 @@ public class ComboSystem : MonoBehaviour
     public string CompleteCombo(KeyCode inputBtn)
     {
         string nameTriggerAnimation = null;
+        maxDamageMultiplier = 1;
 
         foreach (ComboAttack combo in comboAttacks)
         {
@@ -34,6 +40,7 @@ public class ComboSystem : MonoBehaviour
 
                 if (nameTriggerAnimation == null)
                 {
+                    if (maxDamageMultiplier < combo.ComboDamageMultiplier(_numCombo)) maxDamageMultiplier = combo.ComboDamageMultiplier(_numCombo);
                     nameTriggerAnimation = combo.GetAnimationName(_numCombo);
                     lastAttackTime = Time.time;
                     _numCombo++;
@@ -42,7 +49,7 @@ public class ComboSystem : MonoBehaviour
             else
             {
                 //Debug.Log(String.Format("_numCombo: {0} | NumCombo: {1}", _numCombo, combo.NumCombo));
-                Debug.Log(String.Format("_numCombo == combo.NumCombo: {0} | inputBtn == comboBtn: {1} | HitTimeRange: {2} | name: {3}", _numCombo == combo.NumCombo, inputBtn == comboBtn, HitTimeRange(Time.time, lastAttackTime, combo.GetTimeAttack(_numCombo)), combo.GetAnimationName(_numCombo)));
+                //Debug.Log(String.Format("_numCombo == combo.NumCombo: {0} | inputBtn == comboBtn: {1} | HitTimeRange: {2} | name: {3}", _numCombo == combo.NumCombo, inputBtn == comboBtn, HitTimeRange(Time.time, lastAttackTime, combo.GetTimeAttack(_numCombo)), combo.GetAnimationName(_numCombo)));
                 combo.ResetCombo();
             }
         }
@@ -74,5 +81,10 @@ public class ComboSystem : MonoBehaviour
     {
         if (rangeTime == null) return false;
         return currentTime - lastTime <= rangeTime;
+    }
+
+    public float GetCurrentDamageMultiplier()
+    {
+        return maxDamageMultiplier;
     }
 }

@@ -9,6 +9,9 @@ public class ComboAttack : ScriptableObject
     [SerializeField]
     protected KeyCode[] _triggerButtons;
 
+    [SerializeField]
+    protected float[] _сomboDamageMultipliers;
+
     protected float[] _timeBtwAttacks;
 
     protected int _numCombo = 0;
@@ -51,6 +54,12 @@ public class ComboAttack : ScriptableObject
     {
         if (index >= _animationNames.Length || index < 0) return null;
         return _animationNames[index];
+    }
+
+    public float ComboDamageMultiplier(int numCombo)
+    {
+        if (numCombo - 1 >= _сomboDamageMultipliers.Length || numCombo - 1 < 0) return 1;
+        return _сomboDamageMultipliers[numCombo - 1];
     }
 
     public void ResetCombo()

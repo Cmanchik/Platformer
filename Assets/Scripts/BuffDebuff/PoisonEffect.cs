@@ -5,7 +5,17 @@ public class PoisonEffect : Effect
 {
     private TakingDamage takingDamage;
 
-    public PoisonEffect(float actionTime, float tickTime, float tickDamage)
+    //public PoisonEffect(float actionTime, float tickTime, float tickDamage)
+    //{
+    //    base.actionTime = actionTime;
+    //    base.tickTime = tickTime;
+    //    base.tickDamage = tickDamage;
+
+    //    state = EffectState.NoStart;
+    //    type = EffectType.Debuff;
+    //}
+
+    public void Init(float actionTime, float tickTime, float tickDamage)
     {
         base.actionTime = actionTime;
         base.tickTime = tickTime;
