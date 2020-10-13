@@ -55,7 +55,6 @@ public class PlayerController : MonoBehaviour
         return animName;
     }
 
-
     private void AnimationComboSystemLogic(string animationTriggerName)
     {
         if (_animator && animationTriggerName != null)
