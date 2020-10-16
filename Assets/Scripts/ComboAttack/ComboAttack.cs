@@ -59,7 +59,7 @@ public class ComboAttack : ScriptableObject
     public float ComboDamageMultiplier(int numCombo)
     {
         if (numCombo - 1 >= _сomboDamageMultipliers.Length || numCombo - 1 < 0) return 1;
-        return _сomboDamageMultipliers[numCombo - 1];
+        return _сomboDamageMultipliers[numCombo];
     }
 
     public void ResetCombo()

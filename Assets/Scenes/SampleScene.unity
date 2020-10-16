@@ -1840,7 +1840,7 @@ GameObject:
   - component: {fileID: 1772914054}
   m_Layer: 0
   m_Name: Herman
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1904,7 +1904,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772914045}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.94, y: 0.16, z: 0}
+  m_LocalPosition: {x: -11.69, y: 0.142, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1870819015}
@@ -2396,6 +2396,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Mannequin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6956275423174498898, guid: aec8c99ee0de3fb4ab24627406dbb47a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6956275423174498909, guid: aec8c99ee0de3fb4ab24627406dbb47a,
         type: 3}

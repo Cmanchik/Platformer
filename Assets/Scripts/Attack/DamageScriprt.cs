@@ -18,6 +18,7 @@ public class DamageScriprt : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer != 10) return;
+
         attack = new Attack(baseDamage * comboSystem.GetCurrentDamageMultiplier());
         collision.GetComponent<TakingDamage>().TakeDamage(attack);
     }

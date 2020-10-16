@@ -48,8 +48,6 @@ public class ComboSystem : MonoBehaviour
             }
             else
             {
-                //Debug.Log(String.Format("_numCombo: {0} | NumCombo: {1}", _numCombo, combo.NumCombo));
-                //Debug.Log(String.Format("_numCombo == combo.NumCombo: {0} | inputBtn == comboBtn: {1} | HitTimeRange: {2} | name: {3}", _numCombo == combo.NumCombo, inputBtn == comboBtn, HitTimeRange(Time.time, lastAttackTime, combo.GetTimeAttack(_numCombo)), combo.GetAnimationName(_numCombo)));
                 combo.ResetCombo();
             }
         }
