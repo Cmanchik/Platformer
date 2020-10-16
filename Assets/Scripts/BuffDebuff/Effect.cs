@@ -21,19 +21,21 @@ public abstract class Effect : MonoBehaviour
 
     public float FullDamage { get { return actionTime / tickTime * tickDamage; } }
 
+    protected IEnumerator startingCoroutine;
 
-    public void Run()
+    public virtual void Run()
     {
         if (state == EffectState.Start) End();
 
         state = EffectState.Start;
-        StartCoroutine(Action());
+        startingCoroutine = Action();
+        StartCoroutine(startingCoroutine);
     }
 
-    public void End()
+    public virtual void End()
     {
         state = EffectState.End;
-        StopCoroutine(Action());
+        StopCoroutine(startingCoroutine);
     }
 
     protected abstract IEnumerator Action();

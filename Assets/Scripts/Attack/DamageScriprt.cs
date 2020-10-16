@@ -19,7 +19,10 @@ public class DamageScriprt : MonoBehaviour
     {
         if (collision.gameObject.layer != 10) return;
 
-        attack = new Attack(baseDamage * comboSystem.GetCurrentDamageMultiplier());
+        PoisonEffect effect = collision.gameObject.AddComponent<PoisonEffect>();
+        effect.Init(10, 2, 10);
+
+        attack = new Attack(baseDamage * comboSystem.GetCurrentDamageMultiplier(), effect);
         collision.GetComponent<TakingDamage>().TakeDamage(attack);
     }
 }

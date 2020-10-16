@@ -2,16 +2,13 @@
 
 public class Attack : IEnumerable
 {
-    private float damage;
-    public float Damage { get { return damage; } }
-
-    private Effect[] effects;
-    public Effect[] Effects { get { return effects; } }
+    public float Damage { get; }
+    public Effect[] Effects { get; }
 
     public Attack(float damage, params Effect[] effects)
     {
-        this.damage = damage;
-        this.effects = effects;
+        this.Damage = damage;
+        this.Effects = effects;
     }
 
     IEnumerator IEnumerable.GetEnumerator()
@@ -21,6 +18,6 @@ public class Attack : IEnumerable
 
     public AttackEnumerator GetEnumerator()
     {
-        return new AttackEnumerator(effects);
+        return new AttackEnumerator(Effects);
     }
 }

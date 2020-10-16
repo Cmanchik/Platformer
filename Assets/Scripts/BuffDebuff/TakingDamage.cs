@@ -15,7 +15,7 @@ public class TakingDamage : MonoBehaviour
 
     public void TakeDamage(Attack attack)
     {
-        buffDebuffSystem.SetDamage(attack);
-        healthScript.SetDamage(attack.Damage);
+        if (buffDebuffSystem) buffDebuffSystem.SetDamage(attack);
+        if (healthScript) healthScript.SetDamage(attack.Damage);
     }
 }

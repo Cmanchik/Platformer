@@ -19,7 +19,7 @@ public class BuffDebuffSystem : MonoBehaviour
 
     private void Start()
     {
-        Invoke("CheckEffects", 1);
+        InvokeRepeating(nameof(CheckEffects), 0f, 1f);
     }
 
     public void SetDamage(Attack attack)
@@ -35,6 +35,7 @@ public class BuffDebuffSystem : MonoBehaviour
                     else
                     {
                         activeEffect.Run();
+                        Destroy(effect);
                         continue;
                     }
                     break;
@@ -44,6 +45,7 @@ public class BuffDebuffSystem : MonoBehaviour
                     else
                     {
                         activeEffect.Run();
+                        Destroy(effect);
                         continue;
                     }
                     break;
@@ -60,6 +62,7 @@ public class BuffDebuffSystem : MonoBehaviour
             if (buffs[i].State == EffectState.End)
             {
                 buffs[i].End();
+                Destroy(buffs[i]);
                 buffs.RemoveAt(i);
             }
         }
@@ -68,8 +71,10 @@ public class BuffDebuffSystem : MonoBehaviour
         {
             if (debuffs[i].State == EffectState.End)
             {
+                
                 debuffs[i].End();
-                buffs.RemoveAt(i);
+                Destroy(debuffs[i]);
+                debuffs.RemoveAt(i);
             }
         }
     }
