@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 
 [CreateAssetMenu(fileName = "New ComboAttack", menuName = "Combo Attack Data")]
 public class ComboAttack : ScriptableObject
@@ -56,10 +57,15 @@ public class ComboAttack : ScriptableObject
         return _animationNames[index];
     }
 
-    public float ComboDamageMultiplier(int numCombo)
+    public float GetDamageMultiplier(int index)
     {
-        if (numCombo - 1 >= _сomboDamageMultipliers.Length || numCombo - 1 < 0) return 1;
-        return _сomboDamageMultipliers[numCombo];
+        if (index >= _сomboDamageMultipliers.Length || index < 0) return 1;
+        return _сomboDamageMultipliers[index];
+    }
+
+    public int GetIndexCombo(string name)
+    {
+        return Array.IndexOf(_animationNames, name);
     }
 
     public void ResetCombo()
