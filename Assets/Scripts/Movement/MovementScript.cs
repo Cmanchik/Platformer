@@ -70,7 +70,7 @@ public class MovementScript : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (_rb.velocity.y < -0.1f) _state = MovementState.Fall;
+        if (_rb.velocity.y < -0.1f && !_isGrounded) _state = MovementState.Fall;
     }
 
     public void Move(float axisHorizontal)

@@ -14,7 +14,9 @@ GameObject:
   - component: {fileID: 6956275423174498896}
   - component: {fileID: 6956275423174498897}
   - component: {fileID: 6956275423174498908}
-  m_Layer: 0
+  - component: {fileID: 273889607}
+  - component: {fileID: 273889608}
+  m_Layer: 10
   m_Name: Mannequin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a15c5fa9326e7384da5d6b9c61e826fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealthPoint: 100
+  maxHealthPoint: 1000000
   healthPoint: 0
   maxArmorPoint: 3
   timeOffsetDeath: 0
@@ -181,6 +183,31 @@ MonoBehaviour:
   _text: {fileID: 6956275424412997154}
   timeOccurrence: 0
   timeBlackout: 0.3
+--- !u!114 &273889607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6956275423174498898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85361a37704caf04ea6bc2cf938db75b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeCheckTime: 1
+--- !u!114 &273889608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6956275423174498898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6737fc26d9f170d4a93a3c5b10372bb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6956275424379301351
 GameObject:
   m_ObjectHideFlags: 0
