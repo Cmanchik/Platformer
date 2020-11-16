@@ -123,4 +123,14 @@ public class MovementScript : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawCube(jumpPoint.position, new Vector3(widthCheckGround, heightCheckGround));
     }
+
+    public void ClimbUp()
+    {
+        if (GetComponent<ClimbUpScript>() == null)
+        {
+            ClimbUpScript script = gameObject.AddComponent<ClimbUpScript>();
+            script.speed = speed;
+            script.StartClimb();
+        }
+    }
 }

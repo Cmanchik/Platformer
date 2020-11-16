@@ -26,6 +26,7 @@ public class InputManager : Singleton<InputManager>
     public KeyCode jumpCode = KeyCode.W;
     public KeyCode moveLeftCode = KeyCode.A;
     public KeyCode moveRightCode = KeyCode.D;
+    public KeyCode moveDownCode = KeyCode.S;
 
     public KeyCode Attack1Code = KeyCode.Mouse0;
     public KeyCode Attack2Code = KeyCode.Mouse1;
@@ -35,10 +36,10 @@ public class InputManager : Singleton<InputManager>
         isAttack1 = Input.GetKeyDown(Attack1Code);
         isAttack2 = Input.GetKeyDown(Attack2Code);
 
-        isUp = Input.GetKey(KeyCode.W);
-        isLeft = Input.GetKey(KeyCode.A);
-        isDown = Input.GetKey(KeyCode.S);
-        isRight = Input.GetKey(KeyCode.D);
+        isUp = Input.GetKey(jumpCode);
+        isLeft = Input.GetKey(moveLeftCode);
+        isDown = Input.GetKey(moveDownCode);
+        isRight = Input.GetKey(moveRightCode);
 
         isJump = Input.GetKeyDown(jumpCode);
     }

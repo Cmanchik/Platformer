@@ -5,19 +5,30 @@ public class PlayerController : MonoBehaviour
     private MovementScript _movementScript;
     private Animator _animator;
     private ComboSystem _comboSystem;
+    private WorldObjectController _worldObjectController;
 
     private void Awake()
     {
         _movementScript = GetComponent<MovementScript>();
         _comboSystem = GetComponent<ComboSystem>();
         _animator = GetComponent<Animator>();
+        _worldObjectController = GetComponent<WorldObjectController>();
     }
 
     private void Update()
     {
-        MovementLogic();
-        AnimationMovementLogic();
-        AnimationComboSystemLogic(ComboSystemLogic());
+        if (!_worldObjectController.InteractObject)
+        {
+            MovementLogic();
+            AnimationMovementLogic();
+            AnimationComboSystemLogic(ComboSystemLogic());
+        }
+        else
+        {
+            AnimatorStateInfo info = _animator.GetCurrentAnimatorStateInfo(0);
+            _worldObjectController.InteractObject = info.IsTag("AnimInteractObject");
+        }
+        
     }
 
     private void MovementLogic()
