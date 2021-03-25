@@ -8,7 +8,7 @@ public class ComboAttack : ScriptableObject
     protected string[] _animationNames;
 
     [SerializeField]
-    protected KeyCode[] _triggerButtons;
+    protected string[] _triggerAxis;
 
     [SerializeField]
     protected float[] _сomboDamageMultipliers;
@@ -45,10 +45,10 @@ public class ComboAttack : ScriptableObject
         return _timeBtwAttacks[index];
     }
 
-    public KeyCode? GetTriggerButton(int index)
+    public string GetTriggerButton(int index)
     {
-        if (index >= _triggerButtons.Length || index < 0) return null;
-        return _triggerButtons[index];
+        if (index >= _triggerAxis.Length || index < 0) return null;
+        return _triggerAxis[index];
     }
 
     public string GetAnimationName(int index)

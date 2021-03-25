@@ -1,113 +1,49 @@
-﻿using System;
-using TMPro;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ComboSystem : MonoBehaviour
 {
     [SerializeField]
-    private ComboAttack[] comboAttacks;
+    private ComboLogic comboLogic;
 
-    private int indexCombo = 0;
+    [SerializeField]
+    private AttackAnimationControl animationControl;
 
-    private float damageMultiplier;
-    private float lastAttackTime;
+    [SerializeField]
+    private InputAttackController inputController;
 
-    private Animator animator;
-    private AnimatorStateInfo stateInfo;
-
-    private void Awake()
+    private void Start()
     {
-        damageMultiplier = 1;
-        animator = GetComponent<Animator>();
-
-        foreach (ComboAttack combo in comboAttacks)
+        if (!comboLogic)
         {
-            combo.LoadTimeAnimation();
-            combo.ResetCombo();
+            Debug.LogError("Отсутствует компонент comboLogic");
+            enabled = false;
+        }
+
+        if (!animationControl)
+        {
+            Debug.LogError("Отсутствует компонент animationControl");
+            enabled = false;
+        }
+
+        if (!inputController)
+        {
+            Debug.LogError("Отсутствует компонент InputAttackController");
+            enabled = false;
         }
     }
 
-    public string CompleteCombo(KeyCode inputBtn)
+    private void Update()
     {
-        string nameTriggerAnimation = null;
-        damageMultiplier = 1;
+        string nameTriggerAnim = null;
+        if (inputController.Attack1) nameTriggerAnim = comboLogic.CompleteCombo(inputController.Attack1AxisName);
+        else if (inputController.Attack2) nameTriggerAnim = comboLogic.CompleteCombo(inputController.Attack2AxisName);
 
-        foreach (ComboAttack combo in comboAttacks)
+        if (nameTriggerAnim != null)
         {
-            KeyCode? comboBtn = combo.GetTriggerButton(indexCombo);
-
-            if (indexCombo == combo.NumCombo && inputBtn == comboBtn && 
-                HitTimeRange(Time.time, lastAttackTime, combo.GetTimeAttack(indexCombo - 1)))
-            {
-                combo.NumCombo += 1;
-
-                if (nameTriggerAnimation == null)
-                {
-                    nameTriggerAnimation = combo.GetAnimationName(indexCombo);
-                    lastAttackTime = Time.time;
-                    indexCombo++;
-                }
-            }
-            else
-            {
-                combo.ResetCombo();
-            }
+            animationControl.Animate(nameTriggerAnim);
         }
 
-        if (nameTriggerAnimation == null)
-        {
-            indexCombo = 0;
-            foreach (ComboAttack combo in comboAttacks)
-            {
-                KeyCode? comboBtn = combo.GetTriggerButton(indexCombo);
-                if (inputBtn == comboBtn)
-                {
-                    combo.NumCombo++;
-
-                    if (nameTriggerAnimation == null)
-                    {
-                        nameTriggerAnimation = combo.GetAnimationName(indexCombo);
-                        lastAttackTime = Time.time;
-                        indexCombo++;
-                    }
-                }
-            }
-        }
-
-        return nameTriggerAnimation;
-    }
-
-    private bool HitTimeRange(float currentTime, float lastTime, float? rangeTime)
-    {
-        if (rangeTime == null) return false;
-
-        return currentTime - lastTime <= rangeTime;
-    }
-
-    public float GetCurrentDamageMultiplier()
-    {
-        stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-
-        if (stateInfo.IsTag("Attack"))
-        {
-            foreach (ComboAttack combo in comboAttacks)
-            {
-                for (int i = 0; i < combo.MaxCombo; i++)
-                {
-                    
-                    if (stateInfo.IsName(combo.GetAnimationName(i)))
-                    {
-                        damageMultiplier = combo.GetDamageMultiplier(i);
-                        break;
-                    }
-                }
-            }
-        }
-        else
-        {
-            damageMultiplier = 1;
-        }
-
-        return damageMultiplier;
     }
 }

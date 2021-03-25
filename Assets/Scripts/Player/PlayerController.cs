@@ -2,15 +2,15 @@
 
 public class PlayerController : MonoBehaviour
 {
-    private MovementScript _movementScript;
+    private MoveLogic _movementScript;
     private Animator _animator;
-    private ComboSystem _comboSystem;
+    private ComboLogic _comboSystem;
     private WorldObjectController _worldObjectController;
 
     private void Awake()
     {
-        _movementScript = GetComponent<MovementScript>();
-        _comboSystem = GetComponent<ComboSystem>();
+        _movementScript = GetComponent<MoveLogic>();
+        _comboSystem = GetComponent<ComboLogic>();
         _animator = GetComponent<Animator>();
         _worldObjectController = GetComponent<WorldObjectController>();
     }
@@ -59,8 +59,8 @@ public class PlayerController : MonoBehaviour
         string animName = null;
         if (_comboSystem)
         {
-            if (InputManager.Instance.isAttack1) animName = _comboSystem.CompleteCombo(InputManager.Instance.Attack1Code);
-            else if (InputManager.Instance.isAttack2) animName = _comboSystem.CompleteCombo(InputManager.Instance.Attack2Code);
+            //if (InputManager.Instance.isAttack1) animName = _comboSystem.CompleteCombo(InputManager.Instance.Attack1Code);
+            //else if (InputManager.Instance.isAttack2) animName = _comboSystem.CompleteCombo(InputManager.Instance.Attack2Code);
         }
         
         return animName;

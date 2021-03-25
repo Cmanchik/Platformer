@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class MovementScript : MonoBehaviour
+public abstract class MoveLogic : MonoBehaviour
 {
+    /// <summary>
+    /// Скорость перемещение
+    /// </summary>
     [SerializeField]
-    private float speed;
+    [Tooltip("Скорость перемещение")]
+    protected float speed;
+    /// <summary>
+    /// Скорость перемещение
+    /// </summary>
     public float Speed
     {
         get
@@ -21,9 +28,15 @@ public class MovementScript : MonoBehaviour
         }
     }
 
-
+    /// <summary>
+    /// Сила прыжка
+    /// </summary>
     [SerializeField]
-    private float jumpForce;
+    [Tooltip("Сила прыжка")]
+    protected float jumpForce;
+    /// <summary>
+    /// Сила прыжка
+    /// </summary>
     public float JumpForce
     {
         get { return jumpForce; }
@@ -34,30 +47,39 @@ public class MovementScript : MonoBehaviour
         }
     }
 
-
-    private MovementState _state;
+    /// <summary>
+    /// Состояние перемещения
+    /// </summary>
+    protected MovementState _state;
+    /// <summary>
+    /// Состояние перемещения
+    /// </summary>
     public MovementState State { get { return _state; } }
     
 
     [SerializeField]
-    private int _jumpCount;
+    protected int _jumpCount;
     public int JumpCount { get { return _jumpCount; } }
 
-    private int _jumpCurrent;
+    protected int _jumpCurrent;
 
 
-    private Rigidbody2D _rb;
+    protected Rigidbody2D _rb;
     private bool _isGrounded;
 
     [Space]
 
-    public Transform jumpPoint;
-    public LayerMask[] groundLayer;
+    [SerializeField]
+    protected Transform jumpPoint;
+    [SerializeField]
+    protected LayerMask[] groundLayer;
 
     [Space]
 
-    public float widthCheckGround;
-    public float heightCheckGround;
+    [SerializeField]
+    protected float widthCheckGround;
+    [SerializeField]
+    protected float heightCheckGround;
 
     private void Awake()
     {
@@ -73,6 +95,10 @@ public class MovementScript : MonoBehaviour
         if (_rb.velocity.y < -0.1f && !_isGrounded) _state = MovementState.Fall;
     }
 
+    /// <summary>
+    /// Перемещение
+    /// </summary>
+    /// <param name="axisHorizontal">Направление по оси X</param>
     public void Move(float axisHorizontal)
     {
         _rb.velocity = new Vector2(axisHorizontal * speed, _rb.velocity.y);
@@ -87,6 +113,9 @@ public class MovementScript : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Прыжок
+    /// </summary>
     public void Jump()
     {
         if (_jumpCurrent > 0 || _isGrounded)
@@ -103,34 +132,24 @@ public class MovementScript : MonoBehaviour
         IsGroundedUpdate();
     }
 
+    /// <summary>
+    /// Отслеживание сопрокосновения с землей
+    /// </summary>
     private void IsGroundedUpdate()
     {
-        foreach (LayerMask layer in groundLayer)
-        {
-            _isGrounded = Physics2D.OverlapBox(jumpPoint.position, new Vector3(widthCheckGround, heightCheckGround), 0);
+        _isGrounded = Physics2D.OverlapBox(jumpPoint.position, new Vector3(widthCheckGround, heightCheckGround), 0);
 
-            if (_isGrounded)
-            {
-                _jumpCurrent = _jumpCount;
-                _state = MovementState.Idle;
-                return;
-            }
+        if (_isGrounded)
+        {
+            _jumpCurrent = _jumpCount;
+            _state = MovementState.Idle;
+            return;
         }
     }
 
-    void OnDrawGizmosSelected()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawCube(jumpPoint.position, new Vector3(widthCheckGround, heightCheckGround));
-    }
-
-    public void ClimbUp()
-    {
-        if (GetComponent<ClimbUpScript>() == null)
-        {
-            ClimbUpScript script = gameObject.AddComponent<ClimbUpScript>();
-            script.speed = speed;
-            script.StartClimb();
-        }
     }
 }

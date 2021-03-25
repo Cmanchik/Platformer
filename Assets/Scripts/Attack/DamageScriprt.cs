@@ -6,13 +6,13 @@ public class DamageScriprt : MonoBehaviour
 {
     [SerializeField]
     private float baseDamage;
-    private ComboSystem comboSystem;
+    private ComboLogic comboSystem;
 
     private Attack attack;
 
     private void Awake()
     {
-        comboSystem = GetComponentInParent<ComboSystem>();
+        comboSystem = GetComponentInParent<ComboLogic>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

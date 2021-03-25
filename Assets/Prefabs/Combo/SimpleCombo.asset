@@ -16,7 +16,10 @@ MonoBehaviour:
   - Attack1
   - Attack2
   - Attack3
-  _triggerButtons: 430100004301000043010000
+  _triggerAxis:
+  - Fire1
+  - Fire1
+  - Fire1
   "_\u0441omboDamageMultipliers":
   - 1
   - 1.2
