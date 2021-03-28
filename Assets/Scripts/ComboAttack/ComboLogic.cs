@@ -10,13 +10,14 @@ public class ComboLogic : MonoBehaviour
     private float _damageMultiplier;
     private float _lastAttackTime;
 
-    private Animator _animator;
+    [SerializeField]
+    private Animator animator;
     private AnimatorStateInfo _stateInfo;
 
     private void Awake()
     {
         _damageMultiplier = 1;
-        _animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
 
         foreach (ComboAttack combo in comboAttacks)
         {
@@ -59,19 +60,19 @@ public class ComboLogic : MonoBehaviour
 
         // поиск новых комбинации для запуска с начала
         if (nameTriggerAnimation != null) return nameTriggerAnimation;
+        
+        _indexCombo = 0;
+        foreach (ComboAttack combo in comboAttacks)
         {
-            _indexCombo = 0;
-            foreach (ComboAttack combo in comboAttacks)
-            {
-                string comboBtn = combo.GetTriggerButton(_indexCombo);
-                if (axis != comboBtn) continue;
-                combo.NumCombo++;
+            string comboBtn = combo.GetTriggerButton(_indexCombo);
+            if (axis != comboBtn) continue;
+            combo.NumCombo++;
 
-                if (nameTriggerAnimation != null) continue;
-                nameTriggerAnimation = combo.GetAnimationName(_indexCombo);
-                _lastAttackTime = Time.time;
-                _indexCombo++;
-            }
+            if (nameTriggerAnimation != null) continue;
+                
+            nameTriggerAnimation = combo.GetAnimationName(_indexCombo);
+            _lastAttackTime = Time.time;
+            _indexCombo++;
         }
 
         return nameTriggerAnimation;
@@ -86,7 +87,7 @@ public class ComboLogic : MonoBehaviour
 
     public float GetCurrentDamageMultiplier()
     {
-        _stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
+        _stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
         if (_stateInfo.IsTag("Attack"))
         {
