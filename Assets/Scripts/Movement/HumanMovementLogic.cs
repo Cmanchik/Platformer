@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class HumanMovementLogic : MoveLogic
+﻿namespace Movement
 {
+    public class HumanMovementLogic : MoveLogic
+    {
 
+    }
 }

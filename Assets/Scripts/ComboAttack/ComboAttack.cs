@@ -5,71 +5,71 @@ using System;
 public class ComboAttack : ScriptableObject
 {
     [SerializeField]
-    protected string[] _animationNames;
+    protected string[] animationNames;
 
     [SerializeField]
-    protected string[] _triggerAxis;
+    protected string[] triggerAxis;
 
     [SerializeField]
-    protected float[] _сomboDamageMultipliers;
+    protected float[] сomboDamageMultipliers;
 
-    protected float[] _timeBtwAttacks;
+    protected float[] timeBtwAttacks;
 
-    protected int _numCombo = 0;
+    protected int numCombo = 0;
     public int NumCombo 
     { 
-        get { return _numCombo; } 
+        get => numCombo;
         set
         {
-            _numCombo = value;
+            numCombo = value;
 
             if (value >= MaxCombo)
-                _numCombo = 0;
+                numCombo = 0;
         }
     }
 
-    public int MaxCombo { get { return _animationNames.Length; } }
+    public int MaxCombo => animationNames.Length;
 
     public void LoadTimeAnimation()
     {
-        _timeBtwAttacks = new float[_animationNames.Length];
-        for (int i = 0; i < _animationNames.Length; i++)
+        timeBtwAttacks = new float[animationNames.Length];
+        for (int i = 0; i < animationNames.Length; i++)
         {
-            _timeBtwAttacks[i] = (Resources.Load("Attack Animations/" + _animationNames[i]) as AnimationClip).length;
+            timeBtwAttacks[i] = ((AnimationClip) Resources.Load("Attack Animations/" + animationNames[i])).length;
         }
     }
 
     public float? GetTimeAttack(int index)
     {
-        if (index >= _timeBtwAttacks.Length || index < 0) return null;
-        return _timeBtwAttacks[index];
+        if (index >= timeBtwAttacks.Length || index < 0) return null;
+        return timeBtwAttacks[index];
     }
 
     public string GetTriggerButton(int index)
     {
-        if (index >= _triggerAxis.Length || index < 0) return null;
-        return _triggerAxis[index];
+        if (index >= triggerAxis.Length || index < 0) return null;
+        return triggerAxis[index];
     }
 
     public string GetAnimationName(int index)
     {
-        if (index >= _animationNames.Length || index < 0) return null;
-        return _animationNames[index];
+        if (index >= animationNames.Length || index < 0) return null;
+        return animationNames[index];
     }
 
     public float GetDamageMultiplier(int index)
     {
-        if (index >= _сomboDamageMultipliers.Length || index < 0) return 1;
-        return _сomboDamageMultipliers[index];
+        if (index >= сomboDamageMultipliers.Length || index < 0) return 1;
+        return сomboDamageMultipliers[index];
     }
 
-    public int GetIndexCombo(string name)
+    public int GetIndexCombo(string animationName)
     {
-        return Array.IndexOf(_animationNames, name);
+        return Array.IndexOf(animationNames, animationName);
     }
 
     public void ResetCombo()
     {
-        _numCombo = 0;
+        numCombo = 0;
     }
 }

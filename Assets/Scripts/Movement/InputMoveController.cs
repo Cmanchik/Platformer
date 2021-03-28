@@ -1,9 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public abstract class InputMoveController : MonoBehaviour
+namespace Movement
 {
-    public virtual float AxisHorizontal { get; private set; }
-    public virtual bool Jump { get; private set; }
+    public abstract class InputMoveController : MonoBehaviour
+    {
+        public virtual float AxisHorizontal { get; protected set; }
+        public virtual bool Jump { get; protected set; }
+    }
 }

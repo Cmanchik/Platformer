@@ -1,16 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class MovementAnimationControl : MonoBehaviour
+namespace Movement
 {
-    [SerializeField]
-    private Animator animator;
-
-    public void Animate(MovementState state)
+    public class MovementAnimationControl : MonoBehaviour
     {
-        animator.SetBool("Move", state == MovementState.Move);
-        animator.SetBool("Jump", state == MovementState.Jump);
-        animator.SetBool("Fall", state == MovementState.Fall);
+        [SerializeField]
+        private Animator animator;
+
+        private static readonly int Move = Animator.StringToHash("Move");
+        private static readonly int Jump = Animator.StringToHash("Jump");
+        private static readonly int Fall = Animator.StringToHash("Fall");
+
+        public void Animate(MovementState state)
+        {
+            animator.SetBool(Move, state == MovementState.Move);
+            animator.SetBool(Jump, state == MovementState.Jump);
+            animator.SetBool(Fall, state == MovementState.Fall);
+        }
     }
 }

@@ -4,20 +4,7 @@ using UnityEngine;
 
 public class PlayerInputAttackController : InputAttackController
 {
-    public override bool Attack1
-    {
-        get
-        {
-            return Input.GetButtonDown(attack1AxisName);
-        }
-    }
-
+    public override bool Attack1 => Input.GetButtonDown(attack1AxisName);
     
-    public override bool Attack2
-    {
-        get
-        {
-            return Input.GetButtonDown(attack2AxisName);
-        }
-    }
+    public override bool Attack2 => Input.GetButtonDown(attack2AxisName);
 }

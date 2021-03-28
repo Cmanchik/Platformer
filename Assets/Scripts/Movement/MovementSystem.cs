@@ -1,44 +1,45 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class MovementSystem : MonoBehaviour
+namespace Movement
 {
-    [SerializeField]
-    private MoveLogic moveLogic;
-
-    [SerializeField]
-    private MovementAnimationControl animationControl;
-
-    [SerializeField]
-    private InputMoveController inputController;
-
-    private void Start()
+    public class MovementSystem : MonoBehaviour
     {
-        if (!moveLogic)
+        [SerializeField]
+        private MoveLogic moveLogic;
+
+        [SerializeField]
+        private MovementAnimationControl animationControl;
+
+        [SerializeField]
+        private InputMoveController inputController;
+
+        private void Start()
         {
-            Debug.LogError("Отсутствует компонент moveLogic");
-            enabled = false;
+            if (!moveLogic)
+            {
+                Debug.LogError("Отсутствует компонент moveLogic");
+                enabled = false;
+            }
+
+            if (!animationControl)
+            {
+                Debug.LogError("Отсутствует компонент MovementAnimationControl");
+                enabled = false;
+            }
+
+            if (inputController == null)
+            {
+                Debug.LogError("Отсутствует компонент IInputMoveController");
+                enabled = false;
+            }
         }
 
-        if (!animationControl)
+        private void Update()
         {
-            Debug.LogError("Отсутствует компонент MovementAnimationControl");
-            enabled = false;
+            moveLogic.Move(inputController.AxisHorizontal);
+            if (inputController.Jump) moveLogic.Jump();
+
+            animationControl.Animate(moveLogic.State);
         }
-
-        if (inputController == null)
-        {
-            Debug.LogError("Отсутствует компонент IInputMoveController");
-            enabled = false;
-        }
-    }
-
-    private void Update()
-    {
-        moveLogic.Move(inputController.AxisHorizontal);
-        if (inputController.Jump) moveLogic.Jump();
-
-        animationControl.Animate(moveLogic.State);
     }
 }

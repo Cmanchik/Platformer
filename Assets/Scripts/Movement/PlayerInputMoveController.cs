@@ -1,22 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerInputMoveController : InputMoveController
+namespace Movement
 {
-    public override float AxisHorizontal 
-    { 
-        get
-        {
-            return Input.GetAxis("Horizontal");
-        }
-    }
+    public class PlayerInputMoveController : InputMoveController
+    {
+        public override float AxisHorizontal => Input.GetAxis("Horizontal");
 
-    public override bool Jump 
-    { 
-        get
-        {
-            return Input.GetButtonDown("Jump");
-        }
+        public override bool Jump => Input.GetButtonDown("Jump");
     }
 }

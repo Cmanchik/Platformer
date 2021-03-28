@@ -27,11 +27,9 @@ public class ComboSystem : MonoBehaviour
             enabled = false;
         }
 
-        if (!inputController)
-        {
-            Debug.LogError("Отсутствует компонент InputAttackController");
-            enabled = false;
-        }
+        if (inputController) return;
+        Debug.LogError("Отсутствует компонент InputAttackController");
+        enabled = false;
     }
 
     private void Update()

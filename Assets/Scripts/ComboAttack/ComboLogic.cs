@@ -1,24 +1,22 @@
-﻿using System;
-using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ComboLogic : MonoBehaviour
 {
     [SerializeField]
     private ComboAttack[] comboAttacks;
 
-    private int indexCombo = 0;
+    private int _indexCombo;
 
-    private float damageMultiplier;
-    private float lastAttackTime;
+    private float _damageMultiplier;
+    private float _lastAttackTime;
 
-    private Animator animator;
-    private AnimatorStateInfo stateInfo;
+    private Animator _animator;
+    private AnimatorStateInfo _stateInfo;
 
     private void Awake()
     {
-        damageMultiplier = 1;
-        animator = GetComponent<Animator>();
+        _damageMultiplier = 1;
+        _animator = GetComponent<Animator>();
 
         foreach (ComboAttack combo in comboAttacks)
         {
@@ -31,28 +29,27 @@ public class ComboLogic : MonoBehaviour
     /// Выполнение комбо атаки
     /// </summary>
     /// <param name="axis"></param>
-    /// <returns>Название анимации текущей атаки</returns>
+    /// <returns>Название текущей анимации атаки</returns>
     public string CompleteCombo(string axis)
     {
         string nameTriggerAnimation = null;
-        damageMultiplier = 1;
+        _damageMultiplier = 1;
 
-        // поиск комбонаций для продолжения
+        // поиск комбинации для продолжения
         foreach (ComboAttack combo in comboAttacks)
         {
-            string comboBtn = combo.GetTriggerButton(indexCombo);
+            string comboBtn = combo.GetTriggerButton(_indexCombo);
 
-            if (indexCombo == combo.NumCombo && axis == comboBtn && 
-                HitTimeRange(Time.time, lastAttackTime, combo.GetTimeAttack(indexCombo - 1)))
+            if (_indexCombo == combo.NumCombo && axis == comboBtn && 
+                HitTimeRange(Time.time, _lastAttackTime, combo.GetTimeAttack(_indexCombo - 1)))
             {
                 combo.NumCombo += 1;
 
-                if (nameTriggerAnimation == null)
-                {
-                    nameTriggerAnimation = combo.GetAnimationName(indexCombo);
-                    lastAttackTime = Time.time;
-                    indexCombo++;
-                }
+                if (nameTriggerAnimation != null) continue;
+                
+                nameTriggerAnimation = combo.GetAnimationName(_indexCombo);
+                _lastAttackTime = Time.time;
+                _indexCombo++;
             }
             else
             {
@@ -61,23 +58,19 @@ public class ComboLogic : MonoBehaviour
         }
 
         // поиск новых комбинации для запуска с начала
-        if (nameTriggerAnimation == null)
+        if (nameTriggerAnimation != null) return nameTriggerAnimation;
         {
-            indexCombo = 0;
+            _indexCombo = 0;
             foreach (ComboAttack combo in comboAttacks)
             {
-                string comboBtn = combo.GetTriggerButton(indexCombo);
-                if (axis == comboBtn)
-                {
-                    combo.NumCombo++;
+                string comboBtn = combo.GetTriggerButton(_indexCombo);
+                if (axis != comboBtn) continue;
+                combo.NumCombo++;
 
-                    if (nameTriggerAnimation == null)
-                    {
-                        nameTriggerAnimation = combo.GetAnimationName(indexCombo);
-                        lastAttackTime = Time.time;
-                        indexCombo++;
-                    }
-                }
+                if (nameTriggerAnimation != null) continue;
+                nameTriggerAnimation = combo.GetAnimationName(_indexCombo);
+                _lastAttackTime = Time.time;
+                _indexCombo++;
             }
         }
 
@@ -93,28 +86,25 @@ public class ComboLogic : MonoBehaviour
 
     public float GetCurrentDamageMultiplier()
     {
-        stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        _stateInfo = _animator.GetCurrentAnimatorStateInfo(0);
 
-        if (stateInfo.IsTag("Attack"))
+        if (_stateInfo.IsTag("Attack"))
         {
             foreach (ComboAttack combo in comboAttacks)
             {
                 for (int i = 0; i < combo.MaxCombo; i++)
                 {
-                    
-                    if (stateInfo.IsName(combo.GetAnimationName(i)))
-                    {
-                        damageMultiplier = combo.GetDamageMultiplier(i);
-                        break;
-                    }
+                    if (!_stateInfo.IsName(combo.GetAnimationName(i))) continue;
+                    _damageMultiplier = combo.GetDamageMultiplier(i);
+                    break;
                 }
             }
         }
         else
         {
-            damageMultiplier = 1;
+            _damageMultiplier = 1;
         }
 
-        return damageMultiplier;
+        return _damageMultiplier;
     }
 }
