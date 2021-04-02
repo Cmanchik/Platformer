@@ -1,47 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using SystemsManager;
 using UnityEngine;
 
-public class ComboSystem : MonoBehaviour
+namespace ComboAttack
 {
-    [SerializeField]
-    private ComboLogic comboLogic;
-
-    [SerializeField]
-    private AttackAnimationControl animationControl;
-
-    [SerializeField]
-    private InputAttackController inputController;
-
-    private void Start()
+    public class ComboSystem : AbstractSystem
     {
-        if (!comboLogic)
+        [SerializeField]
+        private ComboLogic comboLogic;
+
+        [SerializeField]
+        private AttackAnimationControl animationControl;
+
+        [SerializeField]
+        private InputAttackController input;
+
+        public override void Action()
         {
-            Debug.LogError("Отсутствует компонент comboLogic");
-            enabled = false;
+            string nameTriggerAnim = null;
+            
+            if (input.Attack1) nameTriggerAnim = comboLogic.CompleteCombo(input.Attack1AxisName);
+            else if (input.Attack2) nameTriggerAnim = comboLogic.CompleteCombo(input.Attack2AxisName);
+            
+            Debug.Log(nameTriggerAnim);
+
+            if (nameTriggerAnim != null) animationControl.Animate(nameTriggerAnim);
         }
-
-        if (!animationControl)
-        {
-            Debug.LogError("Отсутствует компонент animationControl");
-            enabled = false;
-        }
-
-        if (inputController) return;
-        Debug.LogError("Отсутствует компонент InputAttackController");
-        enabled = false;
-    }
-
-    private void Update()
-    {
-        string nameTriggerAnim = null;
-        if (inputController.Attack1) nameTriggerAnim = comboLogic.CompleteCombo(inputController.Attack1AxisName);
-        else if (inputController.Attack2) nameTriggerAnim = comboLogic.CompleteCombo(inputController.Attack2AxisName);
-
-        if (nameTriggerAnim != null)
-        {
-            animationControl.Animate(nameTriggerAnim);
-        }
-
     }
 }

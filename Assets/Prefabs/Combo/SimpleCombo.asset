@@ -12,15 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f83df6fd3ba824296e4f5567442686, type: 3}
   m_Name: SimpleCombo
   m_EditorClassIdentifier: 
-  _animationNames:
+  animationNames:
   - Attack1
   - Attack2
   - Attack3
-  _triggerAxis:
+  triggerAxis:
   - Fire1
   - Fire1
   - Fire1
-  "_\u0441omboDamageMultipliers":
+  "\u0441omboDamageMultipliers":
   - 1
-  - 1.2
-  - 1.5
+  - 2
+  - 3

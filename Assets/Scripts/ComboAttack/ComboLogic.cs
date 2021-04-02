@@ -1,50 +1,74 @@
 ﻿using UnityEngine;
 
-public class ComboLogic : MonoBehaviour
+namespace ComboAttack
 {
-    [SerializeField]
-    private ComboAttack[] comboAttacks;
-
-    private int _indexCombo;
-
-    private float _damageMultiplier;
-    private float _lastAttackTime;
-
-    [SerializeField]
-    private Animator animator;
-    private AnimatorStateInfo _stateInfo;
-
-    private void Awake()
+    public class ComboLogic : MonoBehaviour
     {
-        _damageMultiplier = 1;
-        animator = GetComponent<Animator>();
+        [SerializeField]
+        private ComboAttack[] comboAttacks;
 
-        foreach (ComboAttack combo in comboAttacks)
+        private int _indexCombo;
+
+        private float _damageMultiplier;
+        private float _lastAttackTime;
+
+        [SerializeField]
+        private Animator animator;
+        private AnimatorStateInfo _stateInfo;
+
+        private void Awake()
         {
-            combo.LoadTimeAnimation();
-            combo.ResetCombo();
-        }
-    }
+            _damageMultiplier = 1;
+            animator = GetComponent<Animator>();
 
-    /// <summary>
-    /// Выполнение комбо атаки
-    /// </summary>
-    /// <param name="axis"></param>
-    /// <returns>Название текущей анимации атаки</returns>
-    public string CompleteCombo(string axis)
-    {
-        string nameTriggerAnimation = null;
-        _damageMultiplier = 1;
-
-        // поиск комбинации для продолжения
-        foreach (ComboAttack combo in comboAttacks)
-        {
-            string comboBtn = combo.GetTriggerButton(_indexCombo);
-
-            if (_indexCombo == combo.NumCombo && axis == comboBtn && 
-                HitTimeRange(Time.time, _lastAttackTime, combo.GetTimeAttack(_indexCombo - 1)))
+            foreach (ComboAttack combo in comboAttacks)
             {
-                combo.NumCombo += 1;
+                combo.LoadTimeAnimation();
+                combo.ResetCombo();
+            }
+        }
+
+        /// <summary>
+        /// Выполнение комбо атаки
+        /// </summary>
+        /// <param name="axis"></param>
+        /// <returns>Название текущей анимации атаки</returns>
+        public string CompleteCombo(string axis)
+        {
+            string nameTriggerAnimation = null;
+            _damageMultiplier = 1;
+
+            // поиск комбинации для продолжения
+            foreach (ComboAttack combo in comboAttacks)
+            {
+                string comboBtn = combo.GetTriggerButton(_indexCombo);
+
+                if (_indexCombo == combo.NumCombo && axis == comboBtn && 
+                    HitTimeRange(Time.time, _lastAttackTime, combo.GetTimeAttack(_indexCombo - 1)))
+                {
+                    combo.NumCombo += 1;
+
+                    if (nameTriggerAnimation != null) continue;
+                
+                    nameTriggerAnimation = combo.GetAnimationName(_indexCombo);
+                    _lastAttackTime = Time.time;
+                    _indexCombo++;
+                }
+                else
+                {
+                    combo.ResetCombo();
+                }
+            }
+
+            // поиск новых комбинации для запуска с начала
+            if (nameTriggerAnimation != null) return nameTriggerAnimation;
+        
+            _indexCombo = 0;
+            foreach (ComboAttack combo in comboAttacks)
+            {
+                string comboBtn = combo.GetTriggerButton(_indexCombo);
+                if (axis != comboBtn) continue;
+                combo.NumCombo++;
 
                 if (nameTriggerAnimation != null) continue;
                 
@@ -52,60 +76,39 @@ public class ComboLogic : MonoBehaviour
                 _lastAttackTime = Time.time;
                 _indexCombo++;
             }
-            else
-            {
-                combo.ResetCombo();
-            }
+
+            return nameTriggerAnimation;
         }
 
-        // поиск новых комбинации для запуска с начала
-        if (nameTriggerAnimation != null) return nameTriggerAnimation;
-        
-        _indexCombo = 0;
-        foreach (ComboAttack combo in comboAttacks)
+        private bool HitTimeRange(float currentTime, float lastTime, float? rangeTime)
         {
-            string comboBtn = combo.GetTriggerButton(_indexCombo);
-            if (axis != comboBtn) continue;
-            combo.NumCombo++;
+            if (rangeTime == null) return false;
 
-            if (nameTriggerAnimation != null) continue;
-                
-            nameTriggerAnimation = combo.GetAnimationName(_indexCombo);
-            _lastAttackTime = Time.time;
-            _indexCombo++;
+            return currentTime - lastTime <= rangeTime;
         }
 
-        return nameTriggerAnimation;
-    }
-
-    private bool HitTimeRange(float currentTime, float lastTime, float? rangeTime)
-    {
-        if (rangeTime == null) return false;
-
-        return currentTime - lastTime <= rangeTime;
-    }
-
-    public float GetCurrentDamageMultiplier()
-    {
-        _stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-
-        if (_stateInfo.IsTag("Attack"))
+        public float GetCurrentDamageMultiplier()
         {
-            foreach (ComboAttack combo in comboAttacks)
+            _stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+            if (_stateInfo.IsTag("Attack"))
             {
-                for (int i = 0; i < combo.MaxCombo; i++)
+                foreach (ComboAttack combo in comboAttacks)
                 {
-                    if (!_stateInfo.IsName(combo.GetAnimationName(i))) continue;
-                    _damageMultiplier = combo.GetDamageMultiplier(i);
-                    break;
+                    for (int i = 0; i < combo.MaxCombo; i++)
+                    {
+                        if (!_stateInfo.IsName(combo.GetAnimationName(i))) continue;
+                        _damageMultiplier = combo.GetDamageMultiplier(i);
+                        break;
+                    }
                 }
             }
-        }
-        else
-        {
-            _damageMultiplier = 1;
-        }
+            else
+            {
+                _damageMultiplier = 1;
+            }
 
-        return _damageMultiplier;
+            return _damageMultiplier;
+        }
     }
 }

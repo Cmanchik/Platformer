@@ -44,6 +44,13 @@ namespace Movement
             }
         }
 
+        private float _axisHorizontal;
+
+        public float AxisHorizontal
+        {
+            set => _axisHorizontal = value;
+        }
+
         /// <summary>
         /// Состояние перемещения
         /// </summary>
@@ -88,6 +95,9 @@ namespace Movement
         private void LateUpdate()
         {
             if (Rb.velocity.y < -0.1f && !_isGrounded) state = MovementState.Fall;
+            
+            if (state == MovementState.Jump || state == MovementState.Fall) return;
+            state = _axisHorizontal != 0 ? MovementState.Move : MovementState.Idle;
         }
 
         /// <summary>
@@ -101,8 +111,7 @@ namespace Movement
             if (axisHorizontal > 0) transform.rotation = Quaternion.Euler(new Vector2(0, 0));
             else if (axisHorizontal < 0) transform.rotation = Quaternion.Euler(new Vector2(0, 180));
 
-            if (state == MovementState.Jump || state == MovementState.Fall) return;
-            state = axisHorizontal != 0 ? MovementState.Move : MovementState.Idle;
+            _axisHorizontal = axisHorizontal;
         }
 
         /// <summary>

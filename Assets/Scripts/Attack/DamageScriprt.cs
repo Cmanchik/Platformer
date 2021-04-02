@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using ComboAttack;
 using UnityEngine;
 
 public class DamageScriprt : MonoBehaviour

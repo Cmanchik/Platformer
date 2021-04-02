@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 
-public class AttackAnimationControl : MonoBehaviour
+namespace ComboAttack
 {
-    [SerializeField]
-    private Animator animator;
-
-    public void Animate(string animationTriggerName)
+    public class AttackAnimationControl : MonoBehaviour
     {
-        animator.SetTrigger(animationTriggerName);
+        [SerializeField]
+        private Animator animator;
+
+        public void Animate(string animationTriggerName)
+        {
+            animator.SetTrigger(animationTriggerName);
+        }
     }
 }

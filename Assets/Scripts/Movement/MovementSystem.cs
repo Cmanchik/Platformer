@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using SystemsManager;
+using UnityEngine;
 
 namespace Movement
 {
-    public class MovementSystem : MonoBehaviour
+    public class MovementSystem : AbstractSystem
     {
         [SerializeField]
         private MoveLogic moveLogic;
@@ -13,32 +14,11 @@ namespace Movement
         [SerializeField]
         private InputMoveController inputController;
 
-        private void Start()
-        {
-            if (!moveLogic)
-            {
-                Debug.LogError("Отсутствует компонент moveLogic");
-                enabled = false;
-            }
-
-            if (!animationControl)
-            {
-                Debug.LogError("Отсутствует компонент MovementAnimationControl");
-                enabled = false;
-            }
-
-            if (inputController == null)
-            {
-                Debug.LogError("Отсутствует компонент IInputMoveController");
-                enabled = false;
-            }
-        }
-
-        private void Update()
+        public override void Action()
         {
             moveLogic.Move(inputController.AxisHorizontal);
             if (inputController.Jump) moveLogic.Jump();
-
+            
             animationControl.Animate(moveLogic.State);
         }
     }
