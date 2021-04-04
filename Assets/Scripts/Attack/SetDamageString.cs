@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +9,7 @@ using UnityEngine.UI;
 public class SetDamageString : MonoBehaviour
 {
     [SerializeField]
-    private TextMeshProUGUI _text;
+    private TextMeshProUGUI text;
 
     [SerializeField]
     private float timeOccurrence;
@@ -17,8 +18,8 @@ public class SetDamageString : MonoBehaviour
 
     public void SetDamage(float damage)
     {
-        _text.CrossFadeAlpha(1, timeOccurrence, false);
-        _text.text = Convert.ToString(damage);
-        _text.CrossFadeAlpha(0, timeBlackout, false);
+        text.CrossFadeAlpha(1, timeOccurrence, false);
+        text.text = Convert.ToString(damage, CultureInfo.CurrentCulture);
+        text.CrossFadeAlpha(0, timeBlackout, false);
     }
 }

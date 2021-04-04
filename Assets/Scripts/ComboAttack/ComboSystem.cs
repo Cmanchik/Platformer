@@ -20,8 +20,6 @@ namespace ComboAttack
             
             if (input.Attack1) nameTriggerAnim = comboLogic.CompleteCombo(input.Attack1AxisName);
             else if (input.Attack2) nameTriggerAnim = comboLogic.CompleteCombo(input.Attack2AxisName);
-            
-            Debug.Log(nameTriggerAnim);
 
             if (nameTriggerAnim != null) animationControl.Animate(nameTriggerAnim);
         }

@@ -1,25 +1,26 @@
-﻿using UnityEngine;
-
-namespace Movement
+﻿namespace Movement
 {
     public class PlayerInputMoveController : InputMoveController
     {
-        public override float AxisHorizontal
+        private PlayerInput _playerInput;
+        
+        private void Awake()
         {
-            get
-            {
-                //InputEvent.Invoke(this);
-                return Input.GetAxis("Horizontal");
-            }
+            _playerInput = new PlayerInput();
         }
 
-        public override bool Jump
+        private void OnEnable()
         {
-            get
-            {
-                //InputEvent.Invoke(this);
-                return Input.GetButtonDown("Jump");
-            } 
+            _playerInput.Enable();
         }
+
+        private void OnDisable()
+        {
+            _playerInput.Disable();
+        }
+
+        public override float AxisHorizontal => _playerInput.Player.Move.ReadValue<float>();
+
+        public override bool Jump => _playerInput.Player.Jump.triggered; 
     }
 }

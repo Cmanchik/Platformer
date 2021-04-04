@@ -14,18 +14,18 @@ namespace ComboAttack
         [SerializeField]
         protected float[] сomboDamageMultipliers;
 
-        protected float[] timeBtwAttacks;
+        private float[] _timeBtwAttacks;
 
-        protected int numCombo;
+        private int _numCombo;
         public int NumCombo 
         { 
-            get => numCombo;
+            get => _numCombo;
             set
             {
-                numCombo = value;
+                _numCombo = value;
 
                 if (value >= MaxCombo)
-                    numCombo = 0;
+                    _numCombo = 0;
             }
         }
 
@@ -33,17 +33,17 @@ namespace ComboAttack
 
         public void LoadTimeAnimation()
         {
-            timeBtwAttacks = new float[animationNames.Length];
+            _timeBtwAttacks = new float[animationNames.Length];
             for (int i = 0; i < animationNames.Length; i++)
             {
-                timeBtwAttacks[i] = ((AnimationClip) Resources.Load("Attack Animations/" + animationNames[i])).length;
+                _timeBtwAttacks[i] = ((AnimationClip) Resources.Load("Attack Animations/" + animationNames[i])).length;
             }
         }
 
         public float? GetTimeAttack(int index)
         {
-            if (index >= timeBtwAttacks.Length || index < 0) return null;
-            return timeBtwAttacks[index];
+            if (index >= _timeBtwAttacks.Length || index < 0) return null;
+            return _timeBtwAttacks[index];
         }
 
         public string GetTriggerButton(int index)
@@ -66,7 +66,7 @@ namespace ComboAttack
 
         public void ResetCombo()
         {
-            numCombo = 0;
+            _numCombo = 0;
         }
     }
 }

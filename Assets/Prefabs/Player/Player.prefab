@@ -268,7 +268,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 15
   jumpForce: 20
-  jumpCount: 0
+  jumpCount: 1
   jumpPoint: {fileID: 4064087339221147573}
   groundLayer:
   - serializedVersion: 2
@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0c1b3dfe631e01449b6c68f83b37b4f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputSystems:
+  combinedSystems:
   - input: {fileID: 4064087339926418022}
     system: {fileID: 4064087339926418019}
     priority: 1
