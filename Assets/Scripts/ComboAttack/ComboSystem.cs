@@ -19,7 +19,7 @@ namespace ComboAttack
             string nameTriggerAnim = null;
             
             if (input.Attack1) nameTriggerAnim = comboLogic.CompleteCombo(input.Attack1AxisName);
-            else if (input.Attack2) nameTriggerAnim = comboLogic.CompleteCombo(input.Attack2AxisName);
+            if (input.Attack2) nameTriggerAnim = comboLogic.CompleteCombo(input.Attack2AxisName);
 
             if (nameTriggerAnim != null) animationControl.Animate(nameTriggerAnim);
         }

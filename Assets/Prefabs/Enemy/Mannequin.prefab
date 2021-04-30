@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5e9c9a7a1a8b8a46951151ba84a8373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _text: {fileID: 6956275424412997154}
+  text: {fileID: 6956275424412997154}
   timeOccurrence: 0
   timeBlackout: 0.3
 --- !u!114 &273889607

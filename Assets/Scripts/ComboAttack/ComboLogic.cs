@@ -68,6 +68,7 @@ namespace ComboAttack
             {
                 string comboBtn = combo.GetTriggerButton(_indexCombo);
                 if (axis != comboBtn) continue;
+                
                 combo.NumCombo++;
 
                 if (nameTriggerAnimation != null) continue;
@@ -97,7 +98,7 @@ namespace ComboAttack
                 {
                     for (int i = 0; i < combo.MaxCombo; i++)
                     {
-                        if (!_stateInfo.IsName(combo.GetAnimationName(i))) continue;
+                        if (!_stateInfo.IsName(combo.GetAnimationName(i) + "_" +  combo.name)) continue;
                         _damageMultiplier = combo.GetDamageMultiplier(i);
                         break;
                     }

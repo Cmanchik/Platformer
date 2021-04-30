@@ -328,7 +328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attack1AxisName: Fire1
-  attack2AxisName: Fire1
+  attack2AxisName: Fire2
 --- !u!114 &4064087339926418021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,6 +356,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   comboAttacks:
   - {fileID: 11400000, guid: 9f6632e91bfdae94e91afc5554e6dac1, type: 2}
+  - {fileID: 11400000, guid: fa33a1d9f9500484ca672ebe426174bc, type: 2}
   animator: {fileID: 4064087339926418012}
 --- !u!114 &4064087339926418019
 MonoBehaviour:
