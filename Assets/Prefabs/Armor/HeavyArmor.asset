@@ -15,3 +15,4 @@ MonoBehaviour:
   percentageProtection: 0.4
   staminaConsumptionRate: 1.25
   weight: 2
+  color: {r: 0.16981131, g: 0.16981131, b: 0.16981131, a: 0.3529412}

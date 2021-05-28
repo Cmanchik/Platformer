@@ -14,8 +14,10 @@ namespace Transmutation.ArmorSets
 
         [SerializeField] private WeightArmor weight;
         public WeightArmor Weight => weight;
-        
         private bool IsActivated { get; set; }
+
+        [SerializeField] private Color color;
+        public Color Color => color;
 
         public void Init(Characteristics characteristics)
         {

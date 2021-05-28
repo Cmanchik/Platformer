@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   percentageProtection: 0.05
   staminaConsumptionRate: 0.25
-  mass: 0
+  weight: 0
+  color: {r: 1, g: 0, b: 0, a: 0.2784314}
