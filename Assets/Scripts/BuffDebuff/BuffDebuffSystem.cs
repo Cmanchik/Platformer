@@ -3,78 +3,82 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class BuffDebuffSystem : MonoBehaviour
+namespace BuffDebuff
 {
-    [SerializeField]
-    private float timeCheckTime;
-
-    private List<Effect> buffs;
-    private List<Effect> debuffs;
-
-    private void Awake()
+    public class BuffDebuffSystem : MonoBehaviour
     {
-        buffs = new List<Effect>();
-        debuffs = new List<Effect>();
-    }
+        [SerializeField]
+        private float timeCheckTime;
 
-    private void Start()
-    {
-        InvokeRepeating(nameof(CheckEffects), 0f, 1f);
-    }
+        private List<Effect> _buffs;
+        private List<Effect> _debuffs;
 
-    public void SetDamage(Attack attack)
-    {
-        foreach (Effect effect in attack)
+        private void Awake()
         {
-            Effect activeEffect;
-            switch (effect.Type)
-            {
-                case EffectType.Buff:
-                    activeEffect = buffs.FirstOrDefault(elem => elem.name == effect.name);
-                    if (!activeEffect) buffs.Add(effect);
-                    else
-                    {
-                        activeEffect.Run();
-                        Destroy(effect);
-                        continue;
-                    }
-                    break;
-                case EffectType.Debuff:
-                    activeEffect = debuffs.FirstOrDefault(elem => elem.name == effect.name);
-                    if (!activeEffect) debuffs.Add(effect);
-                    else
-                    {
-                        activeEffect.Run();
-                        Destroy(effect);
-                        continue;
-                    }
-                    break;
-            }
-
-            effect.Run();
+            _buffs = new List<Effect>();
+            _debuffs = new List<Effect>();
         }
-    }
 
-    private void CheckEffects()
-    {
-        for (int i = buffs.Count - 1; i >= 0; i--)
+        private void Start()
         {
-            if (buffs[i].State == EffectState.End)
+            InvokeRepeating(nameof(CheckEffects), 0f, timeCheckTime);
+        }
+
+        public void SetDamage(Attack.Attack attack)
+        {
+            foreach (Effect effect in attack)
             {
-                buffs[i].End();
-                Destroy(buffs[i]);
-                buffs.RemoveAt(i);
+                Effect activeEffect;
+                switch (effect.Type)
+                {
+                    case EffectType.Buff:
+                        activeEffect = _buffs.FirstOrDefault(elem => elem.name == effect.name);
+                    
+                        if (!activeEffect) _buffs.Add(effect);
+                        else
+                        {
+                            if (activeEffect != null) activeEffect.Run();
+                            Destroy(effect);
+                            continue;
+                        }
+                        break;
+                    case EffectType.Debuff:
+                        activeEffect = _debuffs.FirstOrDefault(elem => elem.name == effect.name);
+                    
+                        if (!activeEffect) _debuffs.Add(effect);
+                        else
+                        {
+                            if (activeEffect != null) activeEffect.Run();
+                            Destroy(effect);
+                            continue;
+                        }
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
+                effect.Run();
             }
         }
 
-        for (int i = debuffs.Count - 1; i >= 0; i--)
+        private void CheckEffects()
         {
-            if (debuffs[i].State == EffectState.End)
+            for (int i = _buffs.Count - 1; i >= 0; i--)
             {
-                
-                debuffs[i].End();
-                Destroy(debuffs[i]);
-                debuffs.RemoveAt(i);
+                if (_buffs[i].State != EffectState.End) continue;
+            
+                _buffs[i].End();
+                Destroy(_buffs[i]);
+                _buffs.RemoveAt(i);
+            }
+
+            for (int i = _debuffs.Count - 1; i >= 0; i--)
+            {
+                if (_debuffs[i].State != EffectState.End) continue;
+            
+                _debuffs[i].End();
+                Destroy(_debuffs[i]);
+                _debuffs.RemoveAt(i);
             }
         }
     }

@@ -1,5 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using BuffDebuff;
+using Health;
 using UnityEngine;
 
 public class TakingDamage : MonoBehaviour
@@ -13,7 +15,7 @@ public class TakingDamage : MonoBehaviour
         healthScript = GetComponent<HealthScript>();
     }
 
-    public void TakeDamage(Attack attack)
+    public void TakeDamage(Attack.Attack attack)
     {
         if (buffDebuffSystem) buffDebuffSystem.SetDamage(attack);
         if (healthScript) healthScript.SetDamage(attack.Damage);

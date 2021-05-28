@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 273889607}
   - component: {fileID: 273889608}
   m_Layer: 10
-  m_Name: Mannequin
+  m_Name: MannequinHerman
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

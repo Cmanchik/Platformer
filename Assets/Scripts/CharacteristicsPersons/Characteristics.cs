@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Characteristics
+namespace CharacteristicsPersons
 {
     public class Characteristics : MonoBehaviour
     {

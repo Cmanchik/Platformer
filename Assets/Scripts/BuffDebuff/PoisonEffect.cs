@@ -1,41 +1,42 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
-public class PoisonEffect : Effect
+namespace BuffDebuff
 {
-    private TakingDamage takingDamage;
-
-    public void Init(float actionTime, float tickTime, float tickDamage)
+    public class PoisonEffect : Effect
     {
-        this.actionTime = actionTime;
-        this.tickTime = tickTime;
-        this.tickDamage = tickDamage;
+        private TakingDamage _takingDamage;
 
-        state = EffectState.NoStart;
-        type = EffectType.Debuff;
-    }
-
-    public override void Run()
-    {
-        if (state == EffectState.Start) End();
-        if (!takingDamage) takingDamage = GetComponent<TakingDamage>();
-        
-
-        state = EffectState.Start;
-        startingCoroutine = Action();
-        StartCoroutine(startingCoroutine);
-    }
-
-    protected override IEnumerator Action()
-    {
-        for (float actionTime = base.actionTime; actionTime >= 0; actionTime -= tickTime)
+        public void Init(float actionTime, float tickTime, float tickDamage)
         {
-            takingDamage.TakeDamage(new Attack(tickDamage));
+            this.actionTime = actionTime;
+            this.tickTime = tickTime;
+            this.tickDamage = tickDamage;
 
-            yield return new WaitForSeconds(tickTime);
+            state = EffectState.NoStart;
+            type = EffectType.Debuff;
         }
 
-        state = EffectState.End;
+        public override void Run()
+        {
+            if (state == EffectState.Start) End();
+            if (!_takingDamage) _takingDamage = GetComponent<TakingDamage>();
+
+            state = EffectState.Start;
+            startingCoroutine = Action();
+            StartCoroutine(startingCoroutine);
+        }
+
+        protected override IEnumerator Action()
+        {
+            for (float time = actionTime; time >= 0; time -= tickTime)
+            {
+                _takingDamage.TakeDamage(new Attack.Attack(tickDamage));
+
+                yield return new WaitForSeconds(tickTime);
+            }
+
+            state = EffectState.End;
+        }
     }
 }

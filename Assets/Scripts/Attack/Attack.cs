@@ -1,23 +1,27 @@
 ﻿using System.Collections;
+using BuffDebuff;
 
-public class Attack : IEnumerable
+namespace Attack
 {
-    public float Damage { get; }
-    public Effect[] Effects { get; }
-
-    public Attack(float damage, params Effect[] effects)
+    public class Attack : IEnumerable
     {
-        this.Damage = damage;
-        this.Effects = effects;
-    }
+        public float Damage { get; }
+        public Effect[] Effects { get; }
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return (IEnumerator)GetEnumerator();
-    }
+        public Attack(float damage, params Effect[] effects)
+        {
+            this.Damage = damage;
+            this.Effects = effects;
+        }
 
-    public AttackEnumerator GetEnumerator()
-    {
-        return new AttackEnumerator(Effects);
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return (IEnumerator)GetEnumerator();
+        }
+
+        public AttackEnumerator GetEnumerator()
+        {
+            return new AttackEnumerator(Effects);
+        }
     }
 }
