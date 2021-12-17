@@ -5,18 +5,18 @@ namespace Attack
 {
     public class Attack : IEnumerable
     {
+        public Attack(float damage, params Effect[] effects)
+        {
+            Damage = damage;
+            Effects = effects;
+        }
+
         public float Damage { get; }
         public Effect[] Effects { get; }
 
-        public Attack(float damage, params Effect[] effects)
-        {
-            this.Damage = damage;
-            this.Effects = effects;
-        }
-
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return (IEnumerator)GetEnumerator();
+            return GetEnumerator();
         }
 
         public AttackEnumerator GetEnumerator()

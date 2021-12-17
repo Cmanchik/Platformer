@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class CameraMovementScript : MonoBehaviour
 {
-    public Transform target;
-    public float smooth = 5.0f;
     public Vector3 offset = new Vector3(0, 2);
+    public float smooth = 5.0f;
+    public Transform target;
 
     private void FixedUpdate()
     {

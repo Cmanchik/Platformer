@@ -1,21 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ClimbUpScript : MonoBehaviour
 {
+    private Vector2 firstDir;
     private Vector2 firstPos;
+    private bool isFirstPos;
+
+    private bool isStart;
+
+    private Rigidbody2D rb;
+    private Vector2 secondDir;
     private Vector2 secondPos;
 
     public float speed;
-
-    private Vector2 firstDir;
-    private Vector2 secondDir;
-
-    private bool isStart = false;
-    private bool isFirstPos = false;
-
-    private Rigidbody2D rb;
 
     public void StartClimb()
     {
@@ -25,7 +22,7 @@ public class ClimbUpScript : MonoBehaviour
         if (transform.rotation.y == 0) secondPos = new Vector2(firstPos.x + 2, firstPos.y);
         else secondPos = new Vector2(firstPos.x - 2, firstPos.y);
 
-        
+
         rb = GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Kinematic;
     }

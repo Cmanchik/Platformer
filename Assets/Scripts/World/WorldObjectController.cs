@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WorldObjectController : MonoBehaviour
 {
-    public bool InteractObject { get; set; } = false;
-    public string AnimInteractObject { get; private set; }
-
     private Animator animator;
+    public bool InteractObject { get; set; }
+    public string AnimInteractObject { get; private set; }
 
     private void Start()
     {
@@ -21,6 +18,4 @@ public class WorldObjectController : MonoBehaviour
 
         animator.SetTrigger(startTrigger);
     }
-
-    
 }

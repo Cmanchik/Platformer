@@ -1,7 +1,6 @@
-﻿namespace Movement
+namespace Movement
 {
     public class HumanMovementLogic : MoveLogic
     {
-
     }
 }

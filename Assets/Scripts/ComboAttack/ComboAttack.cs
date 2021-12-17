@@ -5,20 +5,18 @@ namespace ComboAttack
     [CreateAssetMenu(fileName = "New ComboAttack", menuName = "Combo Attack Data")]
     public class ComboAttack : ScriptableObject
     {
-        [SerializeField]
-        protected string[] animationNames;
-
-        [SerializeField]
-        protected string[] triggerAxis;
-
-        [SerializeField]
-        protected float[] сomboDamageMultipliers;
+        private int _numCombo;
 
         private float[] _timeBtwAttacks;
 
-        private int _numCombo;
-        public int NumCombo 
-        { 
+        [SerializeField] protected string[] animationNames;
+
+        [SerializeField] protected string[] triggerAxis;
+
+        [SerializeField] protected float[] сomboDamageMultipliers;
+
+        public int NumCombo
+        {
             get => _numCombo;
             set
             {
@@ -35,9 +33,7 @@ namespace ComboAttack
         {
             _timeBtwAttacks = new float[animationNames.Length];
             for (int i = 0; i < animationNames.Length; i++)
-            {
                 _timeBtwAttacks[i] = ((AnimationClip) Resources.Load("Attack Animations/" + animationNames[i])).length;
-            }
         }
 
         public float? GetTimeAttack(int index)

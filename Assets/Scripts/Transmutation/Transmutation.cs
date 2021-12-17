@@ -7,9 +7,9 @@ namespace Transmutation
     [RequireComponent(typeof(Characteristics))]
     public class Transmutation : MonoBehaviour
     {
-        private SpriteRenderer _sprite; // имитация визуальной смены брони
         private Characteristics _characteristics;
-        
+        private SpriteRenderer _sprite; // имитация визуальной смены брони
+
         private void Start()
         {
             _characteristics = GetComponent<Characteristics>();

@@ -6,11 +6,10 @@ namespace Attack
 {
     public class DamageScript : MonoBehaviour
     {
-        [SerializeField]
-        private float baseDamage;
+        private Attack _attack;
         private ComboLogic _comboSystem;
 
-        private Attack _attack;
+        [SerializeField] private float baseDamage;
 
         private void Awake()
         {

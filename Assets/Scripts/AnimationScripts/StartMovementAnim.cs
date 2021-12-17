@@ -5,9 +5,8 @@ namespace AnimationScripts
 {
     public class StartMovementAnim : StateMachineBehaviour
     {
-        [SerializeField]
-        private UnityEvent startMovementEvent;
-        
+        [SerializeField] private UnityEvent startMovementEvent;
+
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {

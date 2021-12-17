@@ -1,35 +1,30 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class InputManager : Singleton<InputManager>
 {
-    [NonSerialized]
-    public bool isAttack1;
-    [NonSerialized]
-    public bool isAttack2;
-
-
-    [NonSerialized]
-    public bool isUp;
-    [NonSerialized]
-    public bool isLeft;
-    [NonSerialized]
-    public bool isDown;
-    [NonSerialized]
-    public bool isRight;
-
-    [NonSerialized]
-    public bool isJump;
-
-    public KeyCode jumpCode = KeyCode.W;
-    public KeyCode moveLeftCode = KeyCode.A;
-    public KeyCode moveRightCode = KeyCode.D;
-    public KeyCode moveDownCode = KeyCode.S;
-
     public KeyCode Attack1Code = KeyCode.Mouse0;
     public KeyCode Attack2Code = KeyCode.Mouse1;
+
+    [NonSerialized] public bool isAttack1;
+
+    [NonSerialized] public bool isAttack2;
+
+    [NonSerialized] public bool isDown;
+
+    [NonSerialized] public bool isJump;
+
+    [NonSerialized] public bool isLeft;
+
+    [NonSerialized] public bool isRight;
+
+
+    [NonSerialized] public bool isUp;
+
+    public KeyCode jumpCode = KeyCode.W;
+    public KeyCode moveDownCode = KeyCode.S;
+    public KeyCode moveLeftCode = KeyCode.A;
+    public KeyCode moveRightCode = KeyCode.D;
 
     private void Update()
     {

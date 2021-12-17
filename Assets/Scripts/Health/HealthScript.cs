@@ -13,39 +13,35 @@ namespace Health
 
     public class HealthScript : MonoBehaviour
     {
-        [SerializeField]
-        private float maxHealthPoint;
-        [SerializeField]
-        private float healthPoint;
-
-        [SerializeField]
-        private float maxArmorPoint;
         private float _armorPoint;
-
-        [SerializeField]
-        private float timeOffsetDeath;
-
-        private HealthState _state;
-        public HealthState State => _state;
 
 
         private bool _isVulnerability;
-        public bool IsVulnerability 
-        { 
+
+        [SerializeField] private UnityEvent deathEvent;
+
+        [SerializeField] private float healthPoint;
+
+        [SerializeField] private HitEvent hitEvent;
+
+        [SerializeField] private float maxArmorPoint;
+
+        [SerializeField] private float maxHealthPoint;
+
+        [SerializeField] private float timeOffsetDeath;
+
+        public HealthState State { get; private set; }
+
+        public bool IsVulnerability
+        {
             get => _isVulnerability;
 
             set
             {
                 _isVulnerability = value;
-                _state = value ? HealthState.Vulnerability : HealthState.InVulnerability;
+                State = value ? HealthState.Vulnerability : HealthState.InVulnerability;
             }
         }
-
-        [SerializeField]
-        private HitEvent hitEvent;
-
-        [SerializeField]
-        private UnityEvent deathEvent;
 
         private void Awake()
         {
@@ -53,20 +49,17 @@ namespace Health
             _armorPoint = maxArmorPoint;
 
             _isVulnerability = true;
-            _state = HealthState.Vulnerability;
+            State = HealthState.Vulnerability;
         }
 
         public void SetDamage(float damage)
         {
             if (!_isVulnerability) return;
-        
-            hitEvent.Invoke(damage);
-            healthPoint -= (damage - _armorPoint);
 
-            if (healthPoint <= 0)
-            {
-                Death(timeOffsetDeath);
-            }
+            hitEvent.Invoke(damage);
+            healthPoint -= damage - _armorPoint;
+
+            if (healthPoint <= 0) Death(timeOffsetDeath);
         }
 
         public void IncreaseMaxHealth(float healthPoint)
@@ -85,7 +78,7 @@ namespace Health
         {
             deathEvent.Invoke();
             StartCoroutine(DeathTimer(timeOffset));
-            _state = HealthState.Death;
+            State = HealthState.Death;
         }
 
         private IEnumerator DeathTimer(float time)

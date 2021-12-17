@@ -7,13 +7,11 @@ namespace Attack
 {
     public class SetDamageString : MonoBehaviour
     {
-        [SerializeField]
-        private TextMeshProUGUI text;
+        [SerializeField] private TextMeshProUGUI text;
 
-        [SerializeField]
-        private float timeOccurrence;
-        [SerializeField]
-        private float timeBlackout;
+        [SerializeField] private float timeBlackout;
+
+        [SerializeField] private float timeOccurrence;
 
         public void SetDamage(float damage)
         {

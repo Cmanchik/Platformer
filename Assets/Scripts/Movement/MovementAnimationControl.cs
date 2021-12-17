@@ -4,12 +4,11 @@ namespace Movement
 {
     public class MovementAnimationControl : MonoBehaviour
     {
-        [SerializeField]
-        private Animator animator;
-
         private static readonly int Move = Animator.StringToHash("Move");
         private static readonly int Jump = Animator.StringToHash("Jump");
         private static readonly int Fall = Animator.StringToHash("Fall");
+
+        [SerializeField] private Animator animator;
 
         public void Animate(MovementState state)
         {

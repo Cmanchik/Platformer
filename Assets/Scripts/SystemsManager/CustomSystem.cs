@@ -1,10 +1,12 @@
-﻿namespace SystemsManager
+using System;
+
+namespace SystemsManager
 {
-    [System.Serializable]
+    [Serializable]
     public class CustomSystem
     {
         public AbstractInput input;
-        public AbstractSystem system;
         public int priority;
+        public AbstractSystem system;
     }
 }

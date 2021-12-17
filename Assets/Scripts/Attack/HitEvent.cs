@@ -1,4 +1,7 @@
-﻿using UnityEngine.Events;
+﻿using System;
+using UnityEngine.Events;
 
-[System.Serializable]
-public class HitEvent : UnityEvent<float> { }
+[Serializable]
+public class HitEvent : UnityEvent<float>
+{
+}

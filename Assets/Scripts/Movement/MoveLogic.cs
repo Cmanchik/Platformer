@@ -5,14 +5,44 @@ namespace Movement
     [RequireComponent(typeof(Rigidbody2D))]
     public abstract class MoveLogic : MonoBehaviour
     {
+        private float _axisHorizontal;
+        private bool _isGrounded;
+
+        [SerializeField] protected LayerMask[] groundLayer;
+
+        [SerializeField] protected float heightCheckGround;
+
+
+        [SerializeField] protected int jumpCount;
+
+        protected int JumpCurrent;
+
         /// <summary>
-        /// Скорость перемещение
+        ///     Сила прыжка
         /// </summary>
-        [SerializeField]
-        [Tooltip("Скорость перемещение")]
-        protected float speed;
+        [SerializeField] [Tooltip("Сила прыжка")]
+        protected float jumpForce;
+
+        [Space] [SerializeField] protected Transform jumpPoint;
+
+
+        protected Rigidbody2D Rb;
+
         /// <summary>
-        /// Скорость перемещение
+        ///     Скорость перемещение
+        /// </summary>
+        [SerializeField] [Tooltip("Скорость перемещение")]
+        protected float speed;
+
+        /// <summary>
+        ///     Состояние перемещения
+        /// </summary>
+        protected MovementState state;
+
+        [Space] [SerializeField] protected float widthCheckGround;
+
+        /// <summary>
+        ///     Скорость перемещение
         /// </summary>
         public float Speed
         {
@@ -26,13 +56,7 @@ namespace Movement
         }
 
         /// <summary>
-        /// Сила прыжка
-        /// </summary>
-        [SerializeField]
-        [Tooltip("Сила прыжка")]
-        protected float jumpForce;
-        /// <summary>
-        /// Сила прыжка
+        ///     Сила прыжка
         /// </summary>
         public float JumpForce
         {
@@ -44,44 +68,15 @@ namespace Movement
             }
         }
 
-        private float _axisHorizontal;
-
         public float AxisHorizontal
         {
             set => _axisHorizontal = value;
         }
 
         /// <summary>
-        /// Состояние перемещения
-        /// </summary>
-        protected MovementState state;
-        /// <summary>
-        /// Состояние перемещения
+        ///     Состояние перемещения
         /// </summary>
         public MovementState State => state;
-
-
-        [SerializeField]
-        protected int jumpCount;
-        protected int JumpCurrent;
-
-
-        protected Rigidbody2D Rb;
-        private bool _isGrounded;
-
-        [Space]
-
-        [SerializeField]
-        protected Transform jumpPoint;
-        [SerializeField]
-        protected LayerMask[] groundLayer;
-
-        [Space]
-
-        [SerializeField]
-        protected float widthCheckGround;
-        [SerializeField]
-        protected float heightCheckGround;
 
         private void Awake()
         {
@@ -95,13 +90,13 @@ namespace Movement
         private void LateUpdate()
         {
             if (Rb.velocity.y < -0.1f && !_isGrounded) state = MovementState.Fall;
-            
+
             if (state == MovementState.Jump || state == MovementState.Fall) return;
             state = _axisHorizontal != 0 ? MovementState.Move : MovementState.Idle;
         }
 
         /// <summary>
-        /// Перемещение
+        ///     Перемещение
         /// </summary>
         /// <param name="axisHorizontal">Направление по оси X</param>
         public void Move(float axisHorizontal)
@@ -115,12 +110,12 @@ namespace Movement
         }
 
         /// <summary>
-        /// Прыжок
+        ///     Прыжок
         /// </summary>
         public void Jump()
         {
             if (JumpCurrent <= 0 || !_isGrounded) return;
-            
+
             Rb.velocity = new Vector2(Rb.velocity.x, jumpForce);
             state = MovementState.Jump;
             _isGrounded = false;
@@ -133,7 +128,7 @@ namespace Movement
         }
 
         /// <summary>
-        /// Отслеживание соприкосновения с землей
+        ///     Отслеживание соприкосновения с землей
         /// </summary>
         private void IsGroundedUpdate()
         {
@@ -141,7 +136,7 @@ namespace Movement
                 jumpPoint.position, new Vector3(widthCheckGround, heightCheckGround), 0);
 
             if (!_isGrounded) return;
-            
+
             JumpCurrent = jumpCount;
             state = MovementState.Idle;
         }

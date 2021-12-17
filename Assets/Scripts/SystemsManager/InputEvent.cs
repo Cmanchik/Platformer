@@ -2,5 +2,7 @@
 
 namespace SystemsManager
 {
-    public class InputEvent : UnityEvent<AbstractInput> {}
+    public class InputEvent : UnityEvent<AbstractInput>
+    {
+    }
 }

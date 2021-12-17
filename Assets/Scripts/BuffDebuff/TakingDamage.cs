@@ -1,13 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using BuffDebuff;
+﻿using BuffDebuff;
 using Health;
 using UnityEngine;
 
 public class TakingDamage : MonoBehaviour
 {
-    private HealthScript healthScript;
     private BuffDebuffSystem buffDebuffSystem;
+    private HealthScript healthScript;
 
     private void Awake()
     {

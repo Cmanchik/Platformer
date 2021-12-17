@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private MoveLogic _movementScript;
     private Animator _animator;
     private ComboLogic _comboSystem;
+    private MoveLogic _movementScript;
     private WorldObjectController _worldObjectController;
 
     private void Awake()
@@ -30,7 +30,6 @@ public class PlayerController : MonoBehaviour
             AnimatorStateInfo info = _animator.GetCurrentAnimatorStateInfo(0);
             _worldObjectController.InteractObject = info.IsTag("AnimInteractObject");
         }
-        
     }
 
     private void MovementLogic()
@@ -64,15 +63,12 @@ public class PlayerController : MonoBehaviour
             //if (InputManager.Instance.isAttack1) animName = _comboSystem.CompleteCombo(InputManager.Instance.Attack1Code);
             //else if (InputManager.Instance.isAttack2) animName = _comboSystem.CompleteCombo(InputManager.Instance.Attack2Code);
         }
-        
+
         return animName;
     }
 
     private void AnimationComboSystemLogic(string animationTriggerName)
     {
-        if (_animator && animationTriggerName != null)
-        {
-            _animator.SetTrigger(animationTriggerName);
-        }
+        if (_animator && animationTriggerName != null) _animator.SetTrigger(animationTriggerName);
     }
 }

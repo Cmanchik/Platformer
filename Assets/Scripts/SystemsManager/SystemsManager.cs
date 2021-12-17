@@ -1,4 +1,3 @@
-﻿using System;
 using System.Linq;
 using UnityEngine;
 
@@ -6,14 +5,12 @@ namespace SystemsManager
 {
     public class SystemsManager : MonoBehaviour
     {
-        [SerializeField] 
-        private CustomSystem[] combinedSystems;
-
-        [SerializeField] 
-        private CustomSystem defaultSystem;
-
         private CustomSystem _currentSystem;
-        
+
+        [SerializeField] private CustomSystem[] combinedSystems;
+
+        [SerializeField] private CustomSystem defaultSystem;
+
         private void Start()
         {
             _currentSystem = defaultSystem;
@@ -38,7 +35,7 @@ namespace SystemsManager
 
             if (call == null) return;
             if (call.priority < _currentSystem.priority) return;
-            
+
             _currentSystem = call;
         }
 
@@ -46,7 +43,7 @@ namespace SystemsManager
         public void TurnOffCurrentSystem()
         {
             if (_currentSystem != null && _currentSystem == defaultSystem) return;
-            
+
             _currentSystem = defaultSystem;
         }
     }

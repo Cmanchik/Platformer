@@ -1,23 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Assertions.Must;
+﻿using UnityEngine;
 
 public class JointWithPlatform : MonoBehaviour
 {
-    private FixedJoint2D fixedJoint2D;
+    [SerializeField] private string animationDown;
 
-    [SerializeField]
-    private string animationUp;
-    [SerializeField]
-    private string animationDown;
+    [SerializeField] private string animationPlatformInteract;
 
-    [SerializeField]
-    private string animationPlatformInteract;
+    [SerializeField] private string animationUp;
 
     private WorldObjectController controller;
+    private FixedJoint2D fixedJoint2D;
 
-    private bool isInteracted = false;
+    private bool isInteracted;
 
     private void Start()
     {
@@ -51,7 +45,7 @@ public class JointWithPlatform : MonoBehaviour
                 controller = null;
                 isInteracted = true;
             }
-            else if (InputManager.Instance.isDown && !isInteracted) 
+            else if (InputManager.Instance.isDown && !isInteracted)
             {
                 controller.InteractWithObject(animationDown);
                 fixedJoint2D.connectedBody = null;

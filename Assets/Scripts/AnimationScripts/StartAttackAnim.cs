@@ -4,8 +4,8 @@ namespace AnimationScripts
 {
     public class StartAttackAnim : StateMachineBehaviour
     {
-        [SerializeField] private string triggerName;
         private static readonly int IsAttack = Animator.StringToHash("isAttack");
+        [SerializeField] private string triggerName;
 
         // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -18,6 +18,5 @@ namespace AnimationScripts
         {
             animator.SetBool(IsAttack, true);
         }
-
     }
 }

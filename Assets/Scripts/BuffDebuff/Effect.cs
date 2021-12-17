@@ -5,24 +5,21 @@ namespace BuffDebuff
 {
     public abstract class Effect : MonoBehaviour
     {
-        [SerializeField]
-        protected float actionTime;
+        [SerializeField] protected float actionTime;
 
-        [SerializeField]
-        protected float tickTime;
-
-        [SerializeField]
-        protected float tickDamage;
+        protected IEnumerator startingCoroutine;
 
         protected EffectState state;
-        public EffectState State => state;
+
+        [SerializeField] protected float tickDamage;
+
+        [SerializeField] protected float tickTime;
 
         protected EffectType type;
+        public EffectState State => state;
         public EffectType Type => type;
 
         public float FullDamage => actionTime / tickTime * tickDamage;
-
-        protected IEnumerator startingCoroutine;
 
         public virtual void Run()
         {

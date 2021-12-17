@@ -7,11 +7,10 @@ namespace BuffDebuff
 {
     public class BuffDebuffSystem : MonoBehaviour
     {
-        [SerializeField]
-        private float timeCheckTime;
-
         private List<Effect> _buffs;
         private List<Effect> _debuffs;
+
+        [SerializeField] private float timeCheckTime;
 
         private void Awake()
         {
@@ -33,25 +32,33 @@ namespace BuffDebuff
                 {
                     case EffectType.Buff:
                         activeEffect = _buffs.FirstOrDefault(elem => elem.name == effect.name);
-                    
-                        if (!activeEffect) _buffs.Add(effect);
+
+                        if (!activeEffect)
+                        {
+                            _buffs.Add(effect);
+                        }
                         else
                         {
                             if (activeEffect != null) activeEffect.Run();
                             Destroy(effect);
                             continue;
                         }
+
                         break;
                     case EffectType.Debuff:
                         activeEffect = _debuffs.FirstOrDefault(elem => elem.name == effect.name);
-                    
-                        if (!activeEffect) _debuffs.Add(effect);
+
+                        if (!activeEffect)
+                        {
+                            _debuffs.Add(effect);
+                        }
                         else
                         {
                             if (activeEffect != null) activeEffect.Run();
                             Destroy(effect);
                             continue;
                         }
+
                         break;
                     default:
                         throw new ArgumentOutOfRangeException();
@@ -66,7 +73,7 @@ namespace BuffDebuff
             for (int i = _buffs.Count - 1; i >= 0; i--)
             {
                 if (_buffs[i].State != EffectState.End) continue;
-            
+
                 _buffs[i].End();
                 Destroy(_buffs[i]);
                 _buffs.RemoveAt(i);
@@ -75,7 +82,7 @@ namespace BuffDebuff
             for (int i = _debuffs.Count - 1; i >= 0; i--)
             {
                 if (_debuffs[i].State != EffectState.End) continue;
-            
+
                 _debuffs[i].End();
                 Destroy(_debuffs[i]);
                 _debuffs.RemoveAt(i);

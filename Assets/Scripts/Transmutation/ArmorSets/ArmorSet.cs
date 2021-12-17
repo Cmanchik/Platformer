@@ -6,17 +6,15 @@ namespace Transmutation.ArmorSets
     [CreateAssetMenu(fileName = "New ArmorSet", menuName = "ArmorSet/Armor")]
     public class ArmorSet : ScriptableObject
     {
-        [Range(0f, 1f)]
-        [SerializeField] private float percentageProtection;
-        
-        [Range(0f, 2f)]
-        [SerializeField] private float staminaConsumptionRate;
+        [SerializeField] private Color color;
+
+        [Range(0f, 1f)] [SerializeField] private float percentageProtection;
+
+        [Range(0f, 2f)] [SerializeField] private float staminaConsumptionRate;
 
         [SerializeField] private WeightArmor weight;
         public WeightArmor Weight => weight;
         private bool IsActivated { get; set; }
-
-        [SerializeField] private Color color;
         public Color Color => color;
 
         public void Init(Characteristics characteristics)

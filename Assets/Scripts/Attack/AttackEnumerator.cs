@@ -1,25 +1,15 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using BuffDebuff;
-using UnityEngine;
 
 public class AttackEnumerator : IEnumerator
 {
     public Effect[] effects;
-    int position = -1;
+    private int position = -1;
 
     public AttackEnumerator(Effect[] effects)
     {
         this.effects = effects;
-    }
-
-    object IEnumerator.Current
-    {
-        get
-        {
-            return Current;
-        }
     }
 
     public Effect Current
@@ -37,10 +27,12 @@ public class AttackEnumerator : IEnumerator
         }
     }
 
+    object IEnumerator.Current => Current;
+
     public bool MoveNext()
     {
         position++;
-        return (position < effects.Length);
+        return position < effects.Length;
     }
 
     public void Reset()
