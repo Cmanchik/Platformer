@@ -1,4 +1,6 @@
-﻿namespace Movement
+﻿using UnityEngine.InputSystem;
+
+namespace Movement
 {
     public class PlayerInputMoveController : InputMoveController
     {
