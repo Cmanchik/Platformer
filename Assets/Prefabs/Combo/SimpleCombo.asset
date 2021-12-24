@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f83df6fd3ba824296e4f5567442686, type: 3}
   m_Name: SimpleCombo
   m_EditorClassIdentifier: 
+  nameCombo: "\u041B\u044C\u0432\u0438\u043D\u043E\u0435 \u043A\u043E\u043C\u0431\u043E"
+  cost: 0
   animationNames:
   - Attack1
   - Attack2

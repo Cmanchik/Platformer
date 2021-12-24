@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace ComboAttack
 {
@@ -12,7 +13,7 @@ namespace ComboAttack
 
         [SerializeField] private Animator animator;
 
-        [SerializeField] private ComboAttack[] comboAttacks;
+        public List<ComboAttack> comboAttacks;
 
         private void Awake()
         {
@@ -21,9 +22,17 @@ namespace ComboAttack
 
             foreach (ComboAttack combo in comboAttacks)
             {
+                
                 combo.LoadTimeAnimation();
                 combo.ResetCombo();
             }
+        }
+
+        public void Add(ComboAttack combo)
+        {
+            comboAttacks.Add(combo);
+            combo.LoadTimeAnimation();
+            combo.ResetCombo();
         }
 
         /// <summary>

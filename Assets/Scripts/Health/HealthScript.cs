@@ -20,7 +20,7 @@ namespace Health
 
         [SerializeField] private UnityEvent deathEvent;
 
-        [SerializeField] private float healthPoint;
+        [SerializeField] public float healthPoint;
 
         [SerializeField] private HitEvent hitEvent;
 

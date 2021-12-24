@@ -123,9 +123,10 @@ GameObject:
   - component: {fileID: 4064087339926418020}
   - component: {fileID: 4064087339926418019}
   - component: {fileID: 4064087339926418023}
+  - component: {fileID: 479590980744458146}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,7 +139,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4064087339926418009}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.33, y: -0.49, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4064087339221147573}
@@ -162,6 +163,7 @@ SpriteRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -183,8 +185,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -612175681
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 4723107735738678597, guid: f374107ba66790641b6b7c9d0d9a49d3,
     type: 3}
@@ -266,15 +268,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b7056e25500ed498dc9d3f91e6870b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  jumpForce: 20
-  jumpCount: 1
-  jumpPoint: {fileID: 4064087339221147573}
   groundLayer:
   - serializedVersion: 2
     m_Bits: 256
-  widthCheckGround: 1.26
   heightCheckGround: 0.2
+  jumpCount: 1
+  jumpForce: 20
+  jumpPoint: {fileID: 4064087339221147573}
+  speed: 15
+  widthCheckGround: 1.26
 --- !u!114 &4064087339926418018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,9 +314,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 199668d76ccedaa4db3143d98fbcc3aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveLogic: {fileID: 4064087339926418011}
   animationControl: {fileID: 4064087339926418016}
   inputController: {fileID: 4064087339926418018}
+  moveLogic: {fileID: 4064087339926418011}
 --- !u!114 &4064087339926418022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,10 +356,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65bead501a57edf4695d2f991488f4ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 4064087339926418012}
   comboAttacks:
   - {fileID: 11400000, guid: 9f6632e91bfdae94e91afc5554e6dac1, type: 2}
   - {fileID: 11400000, guid: fa33a1d9f9500484ca672ebe426174bc, type: 2}
-  animator: {fileID: 4064087339926418012}
 --- !u!114 &4064087339926418019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,8 +372,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257ec76deaeac874f8b18a40aef23825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  comboLogic: {fileID: 4064087339926418020}
   animationControl: {fileID: 4064087339926418021}
+  comboLogic: {fileID: 4064087339926418020}
   input: {fileID: 4064087339926418022}
 --- !u!114 &4064087339926418023
 MonoBehaviour:
@@ -387,12 +389,63 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combinedSystems:
   - input: {fileID: 4064087339926418022}
-    system: {fileID: 4064087339926418019}
     priority: 1
+    system: {fileID: 4064087339926418019}
   defaultSystem:
     input: {fileID: 4064087339926418018}
-    system: {fileID: 4064087339926418017}
     priority: 2
+    system: {fileID: 4064087339926418017}
+--- !u!114 &479590980744458146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4064087339926418009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 7b5b949c2bbf3ca40a61f983e23f902d,
+    type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: d633f0ad-ceff-459a-af01-3a8c0100ff76
+    m_ActionName: Player/Move[/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: efc1d47d-91e7-4e6e-ab7d-8a1036bdc2fe
+    m_ActionName: Player/Jump[/Keyboard/w]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8a5a608c-8ece-4970-bb56-1862e7ba8618
+    m_ActionName: Player/Attack1[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 9ee2794f-bf16-41ec-941a-08f610a7192c
+    m_ActionName: Player/Attack2[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b3892349-6c17-4af5-931f-247eede1fc6b
+    m_ActionName: Player/Interact[/Keyboard/v]
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: Mouse and Keyboard
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &4064087340900173587
 GameObject:
   m_ObjectHideFlags: 0

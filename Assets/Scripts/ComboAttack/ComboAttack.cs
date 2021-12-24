@@ -2,16 +2,18 @@
 
 namespace ComboAttack
 {
-    [CreateAssetMenu(fileName = "New ComboAttack", menuName = "Combo Attack Data")]
+    [CreateAssetMenu(fileName = "New ComboAttack", menuName = "ComboInfoItem Attack Data")]
     public class ComboAttack : ScriptableObject
     {
         private int _numCombo;
 
         private float[] _timeBtwAttacks;
+        public string nameCombo;
+        public string cost;
 
         [SerializeField] protected string[] animationNames;
 
-        [SerializeField] protected string[] triggerAxis;
+        [SerializeField] public string[] triggerAxis;
 
         [SerializeField] protected float[] сomboDamageMultipliers;
 

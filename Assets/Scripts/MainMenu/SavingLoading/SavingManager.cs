@@ -1,18 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class SavingManager : MonoBehaviour
+namespace MainMenu.SavingLoading
 {
-    // Start is called before the first frame update
-    void Start()
+    public class SavingManager : Singleton<SavingManager>
     {
-        
-    }
+        public Saving currentSaving;
+        public Saving start;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        private void Awake()
+        {
+            DontDestroyOnLoad(gameObject);
+        }
+
+        public void Save()
+        {
+            GameObject player = GameObject.FindWithTag("Player");
+            currentSaving.playerPosition = player.transform.position;
+
+            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
+            currentSaving.enemies = enemies
+                .Select(enemy => enemy.transform.position).Select(dummy => (Vector2) dummy).ToArray();
+        }
+
+        public void EndGame()
+        {
+            currentSaving.isEndGame = true;
+        }
     }
 }

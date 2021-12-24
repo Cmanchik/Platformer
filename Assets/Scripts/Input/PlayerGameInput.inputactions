@@ -1,5 +1,5 @@
 {
-    "name": "PlayerInput",
+    "name": "PlayerGameInput",
     "maps": [
         {
             "name": "Player",
@@ -11,7 +11,8 @@
                     "id": "d633f0ad-ceff-459a-af01-3a8c0100ff76",
                     "expectedControlType": "Axis",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Jump",
@@ -19,7 +20,8 @@
                     "id": "efc1d47d-91e7-4e6e-ab7d-8a1036bdc2fe",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Attack1",
@@ -27,7 +29,8 @@
                     "id": "8a5a608c-8ece-4970-bb56-1862e7ba8618",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "Attack2",
@@ -35,7 +38,17 @@
                     "id": "9ee2794f-bf16-41ec-941a-08f610a7192c",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "b3892349-6c17-4af5-931f-247eede1fc6b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -118,33 +131,11 @@
                 },
                 {
                     "name": "",
-                    "id": "7ad1593e-5ea9-4d1b-aa03-d0aa5eaadeae",
-                    "path": "<Gamepad>/buttonSouth",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "62567780-ac4b-4eaa-889e-e59ee5e68f09",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "Mouse and Keyboard",
-                    "action": "Attack1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f18b655c-bd8f-4e77-a203-60960a2f13d0",
-                    "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Gamepad",
                     "action": "Attack1",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -162,12 +153,12 @@
                 },
                 {
                     "name": "",
-                    "id": "eaa32340-ab1c-4f89-9242-ae164b9db24a",
-                    "path": "<Gamepad>/buttonNorth",
+                    "id": "31cb31d7-4f7a-4b1c-a960-e08d3ed1d69c",
+                    "path": "<Keyboard>/v",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
-                    "action": "Attack2",
+                    "groups": "Mouse and Keyboard",
+                    "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

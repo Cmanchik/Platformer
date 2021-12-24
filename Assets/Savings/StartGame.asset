@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09b5847ceb0e3ef4b97c2386189a9561, type: 3}
+  m_Name: StartGame
+  m_EditorClassIdentifier: 
+  playerPosition: {x: 3.4, y: 5.86}
+  playerCoin: 0
+  level: 1
+  comboAttacks:
+  - {fileID: 11400000, guid: 9f6632e91bfdae94e91afc5554e6dac1, type: 2}
+  enemies:
+  - {x: 36.69, y: 1.55}
+  - {x: 176.7, y: 7}
+  - {x: 252.9, y: 3.2}
+  - {x: 109.1, y: 12.2}
+  isSave: 1
+  isEndGame: 0

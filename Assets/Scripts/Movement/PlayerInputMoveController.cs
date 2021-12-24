@@ -6,23 +6,13 @@ namespace Movement
     {
         private PlayerInput _playerInput;
 
-        public override float AxisHorizontal => _playerInput.Player.Move.ReadValue<float>();
+        public override float AxisHorizontal => _playerInput.actions["Move"].ReadValue<float>();
 
-        public override bool Jump => _playerInput.Player.Jump.triggered;
+        public override bool Jump => _playerInput.actions["Jump"].triggered;
 
-        private void Awake()
+        private void Start()
         {
-            _playerInput = new PlayerInput();
-        }
-
-        private void OnEnable()
-        {
-            _playerInput.Enable();
-        }
-
-        private void OnDisable()
-        {
-            _playerInput.Disable();
+            _playerInput = GetComponent<PlayerInput>();
         }
     }
 }
